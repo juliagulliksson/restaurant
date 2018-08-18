@@ -4,7 +4,6 @@ header("Content-Type: application/json; charset=UTF-8");
 
 require 'database.php';
 
-//Receive the GET-parameters from main.js
 $formData = json_decode($_GET["formData"], false);
 
 $statement = $pdo->prepare(
@@ -17,18 +16,9 @@ $statement = $pdo->prepare(
 $statement->execute(); 
 $seatingTwoBookings = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$message;
+$bookings = array(
+  "seatingOne" => count($seatingOneBookings), 
+  "seatingTwo" => count($seatingTwoBookings));
 
-if(count($seatingTwoBookings) < 15 && count($seatingOneBookings) < 15){
-  $message = "Both";
- 
-} elseif(count($seatingTwoBookings) < 15) {
-
-  $message = "21:00";
-} elseif(count($seatingOneBookings) < 15){
- $message = "18:00";
-} else{
-  $message = "None";
-}
-echo json_encode($message, JSON_PRETTY_PRINT);
+echo json_encode($bookings, JSON_PRETTY_PRINT);
 
