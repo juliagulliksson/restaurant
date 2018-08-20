@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import SearchForm from './SearchForm';
-import SeatingForm from './SeatingForm';
-import UserForm from './UserForm';
+import React, { Component } from "react";
+import SearchForm from "./SearchForm";
+import SeatingForm from "./SeatingForm";
+import UserForm from "./UserForm";
 
 class Book extends Component {
-
   state = {
     date: "",
     chooseSeating: false,
@@ -17,45 +16,48 @@ class Book extends Component {
     },
     chosenSeating: "",
     booking: false
-  }
+  };
 
-  handleChange = (event) => {
+  handleChange = event => {
     //Update all input field states based on their HTML names
     this.setState({ [event.target.name]: event.target.value });
-  }
-  
-  searchForVacantSeatings = () => {
+  };
 
+  searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
-    fetch('http://localhost/restaurant/src/components/php/search.php?formData=' + formValues,{
-          method: 'GET',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          }
-      })
-      .then((response) => response.json())
-      .then((response) => {
+    fetch(
+      "http://localhost/restaurant/src/components/php/search.php?formData=" +
+        formValues,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(response => {
         console.log(response);
         this.setSeating(response);
-      })
-  }
+      });
+  };
 
-  setSeating = (response) => {
+  setSeating = response => {
     this.setState({
       seatingTimes: {
         seatingOne: response.seatingOne,
         seatingTwo: response.seatingTwo
       },
       chooseSeating: true
-    })
-  }
+    });
+  };
 
   proceedBooking = () => {
     this.setState({
       booking: true
-    })
-  }
+    });
+  };
 
   cancelBooking = () => {
     this.setState({
@@ -67,18 +69,22 @@ class Book extends Component {
   book = () => {
     console.log(this.state);
     let formValues = JSON.stringify(this.state);
-    fetch('http://localhost/restaurant/src/components/php/post.php?formData=' + formValues,{
-          method: 'GET',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          }
-      })
-      .then((response) => response.json())
-      .then((response) => {
+    fetch(
+      "http://localhost/restaurant/src/components/php/post.php?formData=" +
+        formValues,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(response => {
         console.log(response);
-      }) 
-  }
+      });
+  };
 
   render() {
     return (
