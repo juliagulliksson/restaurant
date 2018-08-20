@@ -1,16 +1,8 @@
 import React, { Component } from "react";
 
+//Might not need to be a class, 
+//depends on if we should use radiobuttons for the seating times or not
 export default class SeatingForm extends Component {
-  state = {
-    firstSeating: false,
-    secondSeating: false
-  };
-
-  handleClick = () => {
-    this.setState(prevState => ({
-      firstSeating: true
-    }));
-  };
 
   render() {
     return (
