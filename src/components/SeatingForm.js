@@ -35,7 +35,7 @@ export default class SeatingForm extends Component {
                onChange={this.props.handleChange} />
               21:00
             </label>
-          }
+          
           <button type="button" onClick={this.props.handleClick}>Proceed booking</button>
         
         </form>
