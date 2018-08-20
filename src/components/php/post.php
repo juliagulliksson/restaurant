@@ -1,8 +1,9 @@
 <?php
 require "database.php";
 
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); 
-header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: GET, POST"); 
+header("Access-Control-Allow-Origin: http://localhost:3000"); 
+header("Access-Control-Allow-Headers: Content-Type, accept");
 
 //Receive the GET-parameters from main.js
 $formData = json_decode($_GET["formData"], false);
