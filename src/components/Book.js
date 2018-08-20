@@ -23,17 +23,17 @@ class Book extends Component {
     //Update all input field states based on their HTML names
     this.setState({ [event.target.name]: event.target.value });
   }
-
+  
   searchForVacantSeatings = () => {
 
     let formValues = JSON.stringify(this.state.date);
-    fetch('http://localhost/restaurant/src/components/php/search.php?formData=' + formValues, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch('http://localhost/restaurant/src/components/php/search.php?formData=' + formValues,{
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      })
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
@@ -60,32 +60,32 @@ class Book extends Component {
   book = () => {
     console.log(this.state);
     let formValues = JSON.stringify(this.state);
-    fetch('http://localhost/restaurant/src/components/php/post.php?formData=' + formValues, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch('http://localhost/restaurant/src/components/php/post.php?formData=' + formValues,{
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      })
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
-      })
+      }) 
   }
 
   render() {
     return (
       <div>
-        <SearchForm dateChange={this.handleChange}
-          dateValue={this.state.date} handleClick={this.searchForVacantSeatings} />
+        <SearchForm dateChange= {this.handleChange}
+        dateValue = {this.state.date} handleClick={this.searchForVacantSeatings}/>
 
-        {this.state.chooseSeating &&
-          <SeatingForm seatingTimes={this.state.seatingTimes}
-            chosenSeating={this.state.chosenSeating}
-            handleChange={this.handleChange}
-            handleClick={this.proceedBooking} />}
+        {this.state.chooseSeating && 
+        <SeatingForm seatingTimes = {this.state.seatingTimes}
+        chosenSeating = {this.state.chosenSeating}
+        handleChange={this.handleChange}
+        handleClick = {this.proceedBooking} /> }
 
-        {this.state.booking && <UserForm handleChange={this.handleChange} handleClick={this.book} />}
+        {this.state.booking && <UserForm handleChange={this.handleChange} handleClick={this.book}/>}
       </div>
     );
   }
