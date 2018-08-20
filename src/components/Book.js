@@ -59,8 +59,8 @@ class Book extends Component {
 
   book = () => {
     console.log(this.state);
-   /*  let formValues = JSON.stringify(this.state);
-    fetch('http://localhost/restaurant/src/components/php/search.php?formData=' + formValues,{
+    let formValues = JSON.stringify(this.state);
+    fetch('http://localhost/restaurant/src/components/php/post.php?formData=' + formValues,{
           method: 'GET',
           headers: {
               'Accept': 'application/json',
@@ -70,8 +70,7 @@ class Book extends Component {
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
-        this.setSeating(response);
-      }) */
+      }) 
   }
 
   render() {
