@@ -1,5 +1,5 @@
 import React from "react";
-import Form from './Form';
+import Button from './Button';
 
 export default function searchForm({ handleClick, dateValue, dateChange }) {
   let numberOfPeople = [
@@ -24,9 +24,7 @@ export default function searchForm({ handleClick, dateValue, dateChange }) {
 
         <input type="date" name="date" value={dateValue} 
         onChange={dateChange} className="form-control" />
-        <button type="button" onClick={handleClick}>
-          Search
-        </button>
+        <Button handleClick={handleClick}> Search for vacant tables </Button>
       </div>
     </form>
     </div>

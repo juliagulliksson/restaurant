@@ -59,6 +59,13 @@ class Book extends Component {
     });
   };
 
+  cancelBooking = () => {
+    this.setState({
+      booking: false,
+      chooseSeating: false
+    })
+  }
+
   book = () => {
     console.log(this.state);
     let formValues = JSON.stringify(this.state);
@@ -82,24 +89,20 @@ class Book extends Component {
   render() {
     return (
       <div>
-        <SearchForm
-          dateChange={this.handleChange}
-          dateValue={this.state.date}
-          handleClick={this.searchForVacantSeatings}
-        />
+        <SearchForm dateChange= {this.handleChange}
+                    dateValue = {this.state.date} 
+                    handleClick={this.searchForVacantSeatings}/>
 
-        {this.state.chooseSeating && (
-          <SeatingForm
-            seatingTimes={this.state.seatingTimes}
-            chosenSeating={this.state.chosenSeating}
-            handleChange={this.handleChange}
-            handleClick={this.proceedBooking}
-          />
-        )}
+        {this.state.chooseSeating && 
+        <SeatingForm  seatingTimes = {this.state.seatingTimes}
+                      chosenSeating = {this.state.chosenSeating}
+                      handleChange={this.handleChange}
+                      handleClick = {this.proceedBooking} /> }
 
-        {this.state.booking && (
-          <UserForm handleChange={this.handleChange} handleClick={this.book} />
-        )}
+        {this.state.booking && 
+        <UserForm handleChange={this.handleChange} 
+                  handleClick={this.book}
+                  handleCancel={this.cancelBooking}/>}
       </div>
     );
   }

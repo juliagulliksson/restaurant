@@ -1,16 +1,22 @@
 import React from 'react';
+import Button from './Button';
 
-export default function userForm({handleChange, handleClick}){
+export default function userForm({handleChange, handleClick, handleCancel}){
   return (
-    <form>
-      <label htmlFor="name">Name:</label>
-      <input type="text" name="name" onChange={handleChange} />
-      <label htmlFor="email">E-mail:</label>
-      <input type="email" name="email" onChange={handleChange} />
-      <label htmlFor="phone">Phone number:</label>
-      <input type="text" name="phone" onChange={handleChange} />
-      <br/><br/>
-      <button type="button" onClick={handleClick}>Book your table</button>
-    </form> 
+    <div className="form-container">
+      <form className="form-group">
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input type="text" name="name" onChange={handleChange} className="form-control"/>
+          <label htmlFor="email">E-mail:</label>
+          <input type="email" name="email" onChange={handleChange} className="form-control" />
+          <label htmlFor="phone">Phone number:</label>
+          <input type="text" name="phone" onChange={handleChange} className="form-control" />
+          <button onClick={handleCancel} className="btn btn-danger">Cancel</button>
+          <Button handleClick={handleClick}>Book your table</Button>
+          
+        </div>
+      </form>
+    </div>
   );
 }
