@@ -1,5 +1,6 @@
 import React from "react";
 import Button from './Button';
+import Date from './DatePicker';
 
 export default function searchForm({ handleClick, dateValue, dateChange }) {
   let numberOfPeople = [
@@ -22,8 +23,9 @@ export default function searchForm({ handleClick, dateValue, dateChange }) {
         </select>
         <label htmlFor="date">Choose a date:</label>
 
-        <input type="date" name="date" value={dateValue} 
-        onChange={dateChange} className="form-control" />
+          <Date handleChange={dateChange}/>
+      {/*   <input type="date" name="date" value={dateValue} 
+        onChange={dateChange} className="form-control" /> */}
         <Button handleClick={handleClick}> Search for vacant tables </Button>
       </div>
     </form>
