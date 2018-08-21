@@ -9,13 +9,13 @@ export default class SeatingForm extends Component {
     return (
       <React.Fragment>
         {this.props.seatingTimes.seatingTwo > 14 &&
-        this.props.seatingTimes.seatingTwo > 14 ? (
+        this.props.seatingTimes.seatingOne > 14 ? (
           <p>Sorry! No seating times available at this date</p>
         ) : (
           <form>
             <div className="form-group">
               <h2>Available seating times:</h2>
-
+              {this.props.seatingTimes.seatingOne < 14 && 
               <div className="form-check form-check-inline">
                 <label className="form-check-label">
                   <input
@@ -27,20 +27,23 @@ export default class SeatingForm extends Component {
                   />
                   18:00
                 </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <label className="form-check-label">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      value="secondSeating"
-                      name="chosenSeating"
-                      onChange={this.props.handleChange}
-                    />
-                    21:00
-                  </label>
-                </div>
-                <br/>
+              </div> }
+              
+              {this.props.seatingTimes.seatingTwo < 14 && 
+              <div className="form-check form-check-inline">
+                <label className="form-check-label">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    value="secondSeating"
+                    name="chosenSeating"
+                    onChange={this.props.handleChange}
+                  />
+                  21:00
+                </label>
+              </div> }
+             
+              <br/>
               
 
               <Button handleClick={this.props.handleClick}>
