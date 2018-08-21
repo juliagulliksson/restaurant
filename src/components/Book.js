@@ -18,9 +18,14 @@ class Book extends Component {
     booking: false
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     //Update all input field states based on their HTML names
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleDateChange = (date) => {
+    const selectedDate = date.format('YYYY-MM-DD');
+    this.setState({ date: selectedDate })
   };
 
   searchForVacantSeatings = () => {
@@ -38,12 +43,11 @@ class Book extends Component {
     )
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         this.setSeating(response);
       });
   };
 
-  setSeating = response => {
+  setSeating = (response) => {
     this.setState({
       seatingTimes: {
         seatingOne: response.seatingOne,
@@ -54,9 +58,7 @@ class Book extends Component {
   };
 
   proceedBooking = () => {
-    this.setState({
-      booking: true
-    });
+    this.setState({ booking: true });
   };
 
   cancelBooking = () => {
@@ -87,9 +89,10 @@ class Book extends Component {
   };
 
   render() {
+    
     return (
       <div>
-        <SearchForm dateChange= {this.handleChange}
+        <SearchForm dateChange= {this.handleDateChange}
                     dateValue = {this.state.date} 
                     handleClick={this.searchForVacantSeatings}/>
 
