@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
-import Book from "./components/Book";
 import Navigation from "./components/Navigation";
 import Home from "./components/routes/Home";
 import Contact from "./components/routes/Contact";

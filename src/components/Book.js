@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
 import SeatingForm from "./SeatingForm";
 import UserForm from "./UserForm";
 import moment from 'moment';

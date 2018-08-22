@@ -1,22 +1,30 @@
 .search-container{
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .header-image{
   height: 400px;
   background-size: cover;
-  background-image: url('images/header.jpg');
+  background-image: url('images/restaurantbild.jpeg');
+  position: relative;
+  text-align: center;
+  background-position: 0px -100px;
+  background-attachment: fixed;
 }
 
 .search-container form{
-  width: 90%;
+  width: 55%;
   margin: 0 auto;
+  text-align: center;
 }
 
-.btn{
-  background-color: rgb(37, 121, 37);
-}
+/* .btn {
+  background-color: rgb(201, 197, 197);
+} */
 
 select.form-control:not([size]):not([multiple]){
   padding-right: 6em;
