@@ -17,7 +17,8 @@ class Book extends Component {
     },
     chosenSeating: "",
     booking: false,
-    bookingComplete: false
+    bookingComplete: false,
+    error: ""
   };
 
   handleChange = (event) => {
@@ -60,18 +61,41 @@ class Book extends Component {
   };
 
   proceedBooking = () => {
-    this.setState({ booking: true });
+    if(this.state.chosenSeating !== ""){
+      this.setState({ booking: true, error: "" });
+    } else {
+      this.setState({error: "Please choose a seating time"})
+    }
   };
 
   cancelBooking = () => {
     this.setState({
       booking: false,
-      chooseSeating: false
+      chooseSeating: false,
+      error: ""
     })
   }
 
+  validateEmail = (email) => {
+    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
+      return true
+    }
+    return false
+  }
+
+  validateBooking = () => {
+    if(this.validateEmail(this.state.email)){
+      if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
+        this.book();
+      } else {
+        this.setState({error: "Please enter the required fields"})
+      }
+    } else {
+      this.setState({error: "Please enter a valid email adress"});
+    }
+  };
+
   book = () => {
-    console.log(this.state);
     let formValues = JSON.stringify(this.state);
     fetch(
       "http://localhost/restaurant/src/components/php/post.php?formData=" +
@@ -80,17 +104,18 @@ class Book extends Component {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain"
         }
       }
     )
       .then(() => {
         this.setState({
+          error: "",
           bookingComplete: true,
           booking: false,
           chooseSeating: false})
       });
-  };
+  }
 
   render() {
     let seating;
@@ -98,17 +123,15 @@ class Book extends Component {
     
     return (
       <div>
+       
         <React.Fragment>
-        {this.state.bookingComplete ? (
+        <div className="form-container">
+        {this.state.bookingComplete &&
         
         <div className="success">
           <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
-        </div>  )
-        :
-        (
-         <SearchForm dateChange= {this.handleDateChange}
-                    dateValue = {this.state.date} 
-                    handleClick = {this.searchForVacantSeatings} />  )}
+        </div>  
+        }
         
         
         {this.state.chooseSeating && 
@@ -116,15 +139,16 @@ class Book extends Component {
                       chosenSeating = {this.state.chosenSeating}
                       handleChange={this.handleChange}
                       handleClick = {this.proceedBooking} /> }
-
+       
+        <div className="error">
+          <p>{this.state.error}</p>
+        </div>
+          
         {this.state.booking && 
         <UserForm handleChange={this.handleChange} 
                   handleClick={this.book}
                   handleCancel={this.cancelBooking}/>}
-        
-        
-      
-       
+        </div>
         </React.Fragment>
       </div>
         
