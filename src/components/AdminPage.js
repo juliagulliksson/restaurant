@@ -1,10 +1,10 @@
 import React from "react";
-import AdminSearchForm from "./AdminPage";
+import AdminSearchForm from "./AdminSearchForm";
+import Button from "./Button";
 
 class AdminPage extends React.Component {
   state = {
-    bookings: [],
-    seating: []
+    bookings: []
   };
 
   componentDidMount() {
@@ -28,34 +28,46 @@ class AdminPage extends React.Component {
       console.log("No bookings found");
       return;
     } else {
-      return this.state.bookings.map(booking => {
-        return (
-          <tr key={booking.bookingId}>
-            <td>{booking.bookingId}</td>
-            <td>{booking.date}</td>
-            <td>{booking.seatingOne}</td>
-            <td>{booking.seatingOne}</td>
-            <td>{booking.name}</td>
-            <td>{booking.userPhone}</td>
-            <td>{booking.email}</td>
-          </tr>
-        );
-      });
+      return (
+        this.state.bookings
+          // .filter(booking => {
+          //   return booking.name === "Poodle"; //state variable for name
+          // })
+          .map(booking => {
+            return (
+              <tr key={booking.bookingId}>
+                <td>{booking.bookingId}</td>
+                <td>{booking.date}</td>
+                <td>{booking.seatingOne == 1 ? "18:00" : "21:00"}</td>
+                <td>{booking.name}</td>
+                <td>{booking.userPhone}</td>
+                <td>{booking.email}</td>
+                <td>
+                  <Button />
+                </td>
+                <td>
+                  <Button />
+                </td>
+              </tr>
+            );
+          })
+      );
     }
   };
 
   render() {
     return (
       <div>
+        <AdminSearchForm />
+        <br />
         <h2>Current Bookings</h2>
-
+        <br />
         <table>
           <tbody>
             <tr>
               <th>Booking ID</th>
               <th>Date</th>
-              <th>18:00</th>
-              <th>21:00</th>
+              <th>Time</th>
               <th>Name</th>
               <th>Phone</th>
               <th>Email</th>
