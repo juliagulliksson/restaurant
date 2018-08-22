@@ -1,8 +1,10 @@
 import React from "react";
+import AdminSearchForm from "./AdminPage";
 
 class AdminPage extends React.Component {
   state = {
-    bookings: []
+    bookings: [],
+    seating: []
   };
 
   componentDidMount() {
@@ -28,21 +30,11 @@ class AdminPage extends React.Component {
     } else {
       return this.state.bookings.map(booking => {
         return (
-          // <ul key={booking.bookingId}>
-          //   <h3>Booking Ref: {booking.bookingId} </h3>
-          //   <li>Date: {booking.date}</li>
-          //   <li>Seating one: {booking.seatingOne}</li>
-          //   <li>Seating two: {booking.seatingTwo}</li>
-          //   <li>Name: {booking.name}</li>
-          //   <li>Tel number: {booking.userPhone}</li>
-          //   <li>Email: {booking.email}</li>
-          // </ul>
-
           <tr key={booking.bookingId}>
             <td>{booking.bookingId}</td>
             <td>{booking.date}</td>
             <td>{booking.seatingOne}</td>
-            <td>{booking.seatingTwo}</td>
+            <td>{booking.seatingOne}</td>
             <td>{booking.name}</td>
             <td>{booking.userPhone}</td>
             <td>{booking.email}</td>
@@ -58,16 +50,17 @@ class AdminPage extends React.Component {
         <h2>Current Bookings</h2>
 
         <table>
-          <tr>
-            <th>Booking ID</th>
-            <th>Date</th>
-            <th>18:00</th>
-            <th>21:00</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-          </tr>
-
+          <tbody>
+            <tr>
+              <th>Booking ID</th>
+              <th>Date</th>
+              <th>18:00</th>
+              <th>21:00</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+            </tr>
+          </tbody>
           <tbody>{this.displayBookings()}</tbody>
         </table>
       </div>
