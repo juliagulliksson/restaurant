@@ -4,7 +4,7 @@ import AdminPage from "../AdminPage";
 export default function Admin() {
   return (
     <div>
-      <h1 />
+      <h1>Admin</h1>
       <AdminPage />
     </div>
   );
