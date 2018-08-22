@@ -12,8 +12,8 @@ export default function userForm({handleChange, handleClick, handleCancel}){
           <input type="email" name="email" onChange={handleChange} className="form-control" />
           <label htmlFor="phone">Phone number:</label>
           <input type="text" name="phone" onChange={handleChange} className="form-control" />
-          <button onClick={handleCancel} className="btn btn-danger">Cancel</button>
           <Button handleClick={handleClick}>Book your table</Button>
+          <button onClick={handleCancel} className="btn btn-danger">Cancel</button>
           
         </div>
       </form>

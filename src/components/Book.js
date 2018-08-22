@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import SeatingForm from "./SeatingForm";
 import UserForm from "./UserForm";
+import moment from 'moment';
 
 class Book extends Component {
   state = {
-    date: "",
+    date: moment().format('YYYY-MM-DD'),
     chooseSeating: false,
     name: "",
     email: "",
@@ -15,7 +16,8 @@ class Book extends Component {
       seatingTwo: ""
     },
     chosenSeating: "",
-    booking: false
+    booking: false,
+    bookingComplete: false
   };
 
   handleChange = (event) => {
@@ -82,20 +84,33 @@ class Book extends Component {
         }
       }
     )
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
+      .then(() => {
+        this.setState({
+          bookingComplete: true,
+          booking: false,
+          chooseSeating: false})
       });
   };
 
   render() {
+    let seating;
+    this.state.chosenSeating === "firstSeating" ? seating = "18:00" : seating = "21:00";
     
     return (
       <div>
-        <SearchForm dateChange= {this.handleDateChange}
+        <React.Fragment>
+        {this.state.bookingComplete ? (
+        
+        <div className="success">
+          <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
+        </div>  )
+        :
+        (
+         <SearchForm dateChange= {this.handleDateChange}
                     dateValue = {this.state.date} 
-                    handleClick={this.searchForVacantSeatings}/>
-
+                    handleClick = {this.searchForVacantSeatings} />  )}
+        
+        
         {this.state.chooseSeating && 
         <SeatingForm  seatingTimes = {this.state.seatingTimes}
                       chosenSeating = {this.state.chosenSeating}
@@ -106,7 +121,14 @@ class Book extends Component {
         <UserForm handleChange={this.handleChange} 
                   handleClick={this.book}
                   handleCancel={this.cancelBooking}/>}
+        
+        
+      
+       
+        </React.Fragment>
       </div>
+        
+        
     );
   }
 }

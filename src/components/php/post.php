@@ -1,36 +1,33 @@
 <?php
 require "database.php";
+require "functions/check_if_user_exists.php";
+require "functions/determine_seatings.php";
 
 header("Access-Control-Allow-Methods: GET, POST"); 
 header("Access-Control-Allow-Origin: http://localhost:3000"); 
 header("Access-Control-Allow-Headers: Content-Type, accept");
 
-//Receive the GET-parameters from main.js
+//Receive the GET-parameters from Book.js
 $formData = json_decode($_GET["formData"], false);
 
-//Insert user into database
-$statement = $pdo->prepare(
-  "INSERT INTO users (name, email, phone) 
-  VALUES (:name, :email, :phone)");
-  
-$statement->execute(array(
-  ":name" => $formData->name,
-  ":email" => $formData->email, 
-  ":phone" => $formData->phone
-));
+$user_exists = check_if_user_exists($formData->email);
 
-$seatingOne;
-$seatingTwo;
-$seating;
-if($formData->chosenSeating == "firstSeating"){
-  $seatingOne = 1;
-  $seatingTwo = 0;
-  $seating = "18:00";
-} else {
-  $seatingOne = 0;
-  $seatingTwo = 1;
-  $seating = "21:00";
+if(!$user_exists){
+  //Insert user into database
+  $statement = $pdo->prepare(
+    "INSERT INTO users (name, email, phone) 
+    VALUES (:name, :email, :phone)");
+    
+  $statement->execute(array(
+    ":name" => $formData->name,
+    ":email" => $formData->email, 
+    ":phone" => $formData->phone
+  ));
 }
+
+//Returns an array. If 18:00/"firstSeating", the output is 1, 0.
+// If 21:00/"secondSeating", the output is 0, 1
+$seatings = determine_seatings($formData->chosenSeating);
 
 //Insert booking into database
 $statement = $pdo->prepare(
@@ -40,10 +37,6 @@ $statement = $pdo->prepare(
 $statement->execute(array(
   ":userPhone" => $formData->phone,
   ":date" => $formData->date, 
-  ":seatingOne" => $seatingOne,
-  ":seatingTwo" => $seatingTwo
+  ":seatingOne" => $seatings[0],
+  ":seatingTwo" => $seatings[1]
 ));
-
-$message = "Congratulations! You have booked a table at $formData->date $seating";
-
-echo json_encode($message, JSON_PRETTY_PRINT);
