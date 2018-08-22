@@ -17,6 +17,7 @@ class Book extends Component {
       seatingTwo: ""
     },
     chosenSeating: "",
+    gdpr: false,
     booking: false
   }
 
@@ -58,6 +59,12 @@ class Book extends Component {
     })
   }
 
+  disableBooking = () => {
+    this.setState({
+      booking: false
+    })
+  }
+
   book = () => {
     console.log(this.state);
     let formValues = JSON.stringify(this.state);
@@ -74,6 +81,18 @@ class Book extends Component {
       })
   }
 
+  agreeGdpr = () => {
+    this.setState({
+      gdpr: true
+    })
+  }
+
+  disagreeGdpr = () => {
+    this.setState({
+      allowedToBook: false
+    })
+  }
+
   render() {
     return (
       <div>
@@ -84,9 +103,9 @@ class Book extends Component {
           <SeatingForm seatingTimes={this.state.seatingTimes}
             chosenSeating={this.state.chosenSeating}
             handleChange={this.handleChange}
-            handleClick={this.proceedBooking} />}
+            handleClick={this.agreeGdpr} />}
 
-        <Gdpr />
+        {this.state.gdpr && <Gdpr handleClick={this.disagreeGdpr} />}
 
         {this.state.booking && <UserForm handleChange={this.handleChange} handleClick={this.book} />}
       </div>
