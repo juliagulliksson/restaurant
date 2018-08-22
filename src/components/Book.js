@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import SeatingForm from "./SeatingForm";
+import Gdpr from "../uiElements/gdpr";
 import UserForm from "./UserForm";
 import moment from "moment";
 
@@ -17,6 +18,7 @@ class Book extends Component {
     },
     chosenSeating: "",
     booking: false,
+
     bookingComplete: false
   };
 
@@ -34,7 +36,7 @@ class Book extends Component {
     let formValues = JSON.stringify(this.state.date);
     fetch(
       "http://localhost/restaurant/src/components/php/search.php?formData=" +
-        formValues,
+      formValues,
       {
         method: "GET",
         headers: {
@@ -59,14 +61,30 @@ class Book extends Component {
     });
   };
 
+  agreeGdpr = () => {
+    this.setState({
+      gdpr: true
+    })
+  }
+
+  disagreeGdpr = () => {
+    this.setState({
+      allowedToBook: false
+    })
+  }
+
   proceedBooking = () => {
-    this.setState({ booking: true });
+    this.setState({
+      booking: true,
+      gdpr: false
+    });
   };
 
   cancelBooking = () => {
     this.setState({
       booking: false,
-      chooseSeating: false
+      chooseSeating: false,
+      gdpr: false
     });
   };
 
@@ -75,7 +93,7 @@ class Book extends Component {
     let formValues = JSON.stringify(this.state);
     fetch(
       "http://localhost/restaurant/src/components/php/post.php?formData=" +
-        formValues,
+      formValues,
       {
         method: "GET",
         headers: {
@@ -87,7 +105,8 @@ class Book extends Component {
       this.setState({
         bookingComplete: true,
         booking: false,
-        chooseSeating: false
+        chooseSeating: false,
+        gdpr: false
       });
     });
   };
@@ -109,19 +128,26 @@ class Book extends Component {
               </p>
             </div>
           ) : (
-            <SearchForm
-              dateChange={this.handleDateChange}
-              dateValue={this.state.date}
-              handleClick={this.searchForVacantSeatings}
-            />
-          )}
+              <SearchForm
+                dateChange={this.handleDateChange}
+                dateValue={this.state.date}
+                handleClick={this.searchForVacantSeatings}
+              />
+            )}
 
           {this.state.chooseSeating && (
             <SeatingForm
               seatingTimes={this.state.seatingTimes}
               chosenSeating={this.state.chosenSeating}
               handleChange={this.handleChange}
+              handleClick={this.agreeGdpr}
+            />
+          )}
+
+          {this.state.gdpr && (
+            <Gdpr
               handleClick={this.proceedBooking}
+              handleCancel={this.cancelBooking}
             />
           )}
 
