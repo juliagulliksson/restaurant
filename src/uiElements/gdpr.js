@@ -11,7 +11,6 @@ export default class Gdpr extends Component {
                 </h1>
                     <p>By confirming your booking you agree with us handeling your personal information such as name, phonenumber and email when booking a table.</p>
                     <button onClick={this.props.handleClick} type="submit">I agree</button>
-                    <button onClick={this.props.handleClick} type="submit">I disagree</button>
                 </div >
             </React.Fragment>
         );

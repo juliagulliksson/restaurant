@@ -105,7 +105,7 @@ class Book extends Component {
             handleChange={this.handleChange}
             handleClick={this.agreeGdpr} />}
 
-        {this.state.gdpr && <Gdpr handleClick={this.disagreeGdpr} />}
+        {this.state.gdpr && <Gdpr handleClick={this.proceedBooking} />}
 
         {this.state.booking && <UserForm handleChange={this.handleChange} handleClick={this.book} />}
       </div>
