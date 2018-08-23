@@ -18,6 +18,12 @@
 
 .search-container form{
   width: 55%;
+}
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+.form-container{
+  width: 30%;
   margin: 0 auto;
   text-align: center;
 }
@@ -67,7 +73,46 @@ select.form-control:not([size]):not([multiple]){
 .App-intro {
   font-size: large;
 }
-
+/* Navigation Bar */
+.title{
+  background-color:black;
+}
+.title h1{
+  background-color:black;
+  color:white;
+  padding:50px;
+  height:100%;
+  font-size:300%;
+}
+.navbar{
+  background-color:white;
+  border-style: solid;
+  border-width: 5px;
+  color:black;
+}
+.navbar li{
+  padding:20px;
+  display:flex;
+  justify-content: center;
+  
+}
+.navbar li a{
+  color:black;
+  font-size:150%;
+  font-weight: bold;
+}
+/* Contact */ 
+/* Footer */
+footer ul{
+  border-style: solid;
+  border-width: 5px;
+  padding:10px;
+  width: 100%; 
+  height: 100%;
+}
+footer ul li{
+  list-style:none;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

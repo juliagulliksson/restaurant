@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-export default function userForm({handleChange, handleClick, handleCancel}){
+export default function userForm({ handleChange, handleClick, handleCancel }) {
   return (
     
       <form>
@@ -14,7 +14,7 @@ export default function userForm({handleChange, handleClick, handleCancel}){
           <input type="text" name="phone" onChange={handleChange} className="form-control" />
           <Button handleClick={handleClick}>Book your table</Button>
           <button onClick={handleCancel} className="btn btn-danger">Cancel</button>
-          
+
         </div>
       </form>
     
