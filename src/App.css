@@ -61,7 +61,16 @@ body{
   font-size:150%;
   font-weight: bold;
 }
-/* Contact */ 
+.images-contact ul li{
+  margin:0px;
+  display:inline;
+  list-style:none;
+
+}
+.imagestyle{
+  height:20%;
+  width:30%;
+}
 /* Footer */
 footer ul{
   border-style: solid;
