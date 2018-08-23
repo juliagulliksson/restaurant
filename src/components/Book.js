@@ -27,10 +27,10 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleDateChange = date => {
+  /* handleDateChange = date => {
     const selectedDate = date.format("YYYY-MM-DD");
     this.setState({ date: selectedDate });
-  };
+  }; */
 
   searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
@@ -63,19 +63,14 @@ class Book extends Component {
 
   agreeGdpr = () => {
     this.setState({
-      gdpr: true
-    })
-  }
-
-  disagreeGdpr = () => {
-    this.setState({
-      allowedToBook: false
+      gdpr: false,
+      booking: true
     })
   }
 
   proceedBooking = () => {
     if(this.state.chosenSeating !== ""){
-      this.setState({ booking: true, error: "", gdpr: false });
+      this.setState({ error: "", gdpr: true });
     } else {
       this.setState({error: "Please choose a seating time"})
     }
@@ -132,6 +127,7 @@ class Book extends Component {
   }
 
   render() {
+   
     let seating;
     this.state.chosenSeating === "firstSeating"
       ? (seating = "18:00")
@@ -168,7 +164,7 @@ class Book extends Component {
             
             {this.state.gdpr && (
               <Gdpr
-                handleClick={this.proceedBooking}
+                handleClick={this.agreeGdpr}
                 handleCancel={this.cancelBooking}
               />
             )}
@@ -176,7 +172,7 @@ class Book extends Component {
             {this.state.booking && (
               <UserForm
                 handleChange={this.handleChange}
-                handleClick={this.book}
+                handleClick={this.validateBooking}
                 handleCancel={this.cancelBooking}
               />
             )}

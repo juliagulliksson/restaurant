@@ -18,19 +18,22 @@
 
 .search-container form{
   width: 55%;
+  margin: 0px auto;
 }
+
 body{
   font-family: 'Montserrat', sans-serif;
 }
+
 .form-container{
   width: 30%;
   margin: 0 auto;
   text-align: center;
 }
 
-/* .btn {
-  background-color: rgb(201, 197, 197);
-} */
+.btn-light, .btn-light:hover, .btn-light:active {
+  border: 1px solid black;
+}
 
 select.form-control:not([size]):not([multiple]){
   padding-right: 6em;
@@ -89,6 +92,7 @@ select.form-control:not([size]):not([multiple]){
   border-style: solid;
   border-width: 5px;
   color:black;
+  margin: 0;
 }
 .navbar li{
   padding:20px;
