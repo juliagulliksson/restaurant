@@ -1,9 +1,52 @@
+.search-container{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header-image{
+  height: 400px;
+  background-size: cover;
+  background-image: url('images/restaurantbild.jpeg');
+  position: relative;
+  text-align: center;
+  background-position: 0px -100px;
+  background-attachment: fixed;
+}
+
+.search-container form{
+  width: 55%;
+  margin: 0px auto;
+}
+
 body{
   font-family: 'Montserrat', sans-serif;
 }
+
 .form-container{
   width: 30%;
   margin: 0 auto;
+  text-align: center;
+}
+
+.btn-light, .btn-light:hover, .btn-light:active {
+  border: 1px solid black;
+}
+
+select.form-control:not([size]):not([multiple]){
+  padding-right: 6em;
+  margin-right: 1em;
+}
+
+.error p{
+  color: rgb(163, 6, 6);
+  font-weight: 700;
+}
+
+.required {
+  color: rgb(163, 6, 6);
 }
 
 .btn {
@@ -49,6 +92,7 @@ body{
   border-style: solid;
   border-width: 5px;
   color:black;
+  margin: 0;
 }
 .navbar li{
   padding:20px;

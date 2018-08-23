@@ -4,16 +4,14 @@ require "functions/check_if_user_exists.php";
 require "functions/determine_seatings.php";
 
 header("Access-Control-Allow-Methods: GET, POST"); 
-header("Access-Control-Allow-Origin: http://localhost:3000"); 
+//header("Access-Control-Allow-Origin: http://localhost:3000"); 
 header("Access-Control-Allow-Headers: Content-Type, accept");
 
 //Receive the GET-parameters from Book.js
 $formData = json_decode($_GET["formData"], false);
 
-$user_exists = check_if_user_exists($formData->email);
-
-if(!$user_exists){
-  //Insert user into database
+if(!check_if_user_exists($formData->email)){
+  //User doesn't exist, insert user into database
   $statement = $pdo->prepare(
     "INSERT INTO users (name, email, phone) 
     VALUES (:name, :email, :phone)");
