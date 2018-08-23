@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
 import SeatingForm from "./SeatingForm";
+import Gdpr from "../uiElements/gdpr";
 import UserForm from "./UserForm";
 import moment from "moment";
+import SearchForm from "./SearchForm";
 
 class Book extends Component {
   state = {
@@ -17,7 +18,8 @@ class Book extends Component {
     },
     chosenSeating: "",
     booking: false,
-    bookingComplete: false
+    bookingComplete: false,
+    error: ""
   };
 
   handleChange = event => {
@@ -25,16 +27,16 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleDateChange = date => {
+  /* handleDateChange = date => {
     const selectedDate = date.format("YYYY-MM-DD");
     this.setState({ date: selectedDate });
-  };
+  }; */
 
   searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
     fetch(
       "http://localhost/restaurant/src/components/php/search.php?formData=" +
-        formValues,
+      formValues,
       {
         method: "GET",
         headers: {
@@ -59,23 +61,54 @@ class Book extends Component {
     });
   };
 
+  agreeGdpr = () => {
+    this.setState({
+      gdpr: false,
+      booking: true
+    })
+  }
+
   proceedBooking = () => {
-    this.setState({ booking: true });
+    if(this.state.chosenSeating !== ""){
+      this.setState({ error: "", gdpr: true });
+    } else {
+      this.setState({error: "Please choose a seating time"})
+    }
   };
 
   cancelBooking = () => {
     this.setState({
       booking: false,
-      chooseSeating: false
-    });
+      chooseSeating: false,
+      error: "",
+      gdpr: false
+    })
+  }
+
+  validateEmail = (email) => {
+    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
+      return true
+    }
+    return false
+  }
+
+  validateBooking = () => {
+    if(this.validateEmail(this.state.email)){
+      if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
+        this.book();
+      } else {
+        this.setState({error: "Please enter the required fields"})
+      }
+    } else {
+      this.setState({error: "Please enter a valid email adress"});
+    }
   };
 
   book = () => {
-    console.log(this.state);
     let formValues = JSON.stringify(this.state);
     fetch(
       "http://localhost/restaurant/src/components/php/post.php?formData=" +
-        formValues,
+      formValues,
       {
         method: "GET",
         headers: {
@@ -83,16 +116,18 @@ class Book extends Component {
           "Content-Type": "text/plain"
         }
       }
-    ).then(() => {
-      this.setState({
-        bookingComplete: true,
-        booking: false,
-        chooseSeating: false
+    )
+      .then(() => {
+        this.setState({
+          error: "",
+          bookingComplete: true,
+          booking: false,
+          chooseSeating: false})
       });
-    });
-  };
+  }
 
   render() {
+   
     let seating;
     this.state.chosenSeating === "firstSeating"
       ? (seating = "18:00")
@@ -100,38 +135,48 @@ class Book extends Component {
 
     return (
       <div>
+       
         <React.Fragment>
-          {this.state.bookingComplete ? (
-            <div className="success">
-              <p>
-                Congratulations! You have booked a table at {this.state.date}{" "}
-                {seating}
-              </p>
-            </div>
-          ) : (
+        <div className="form-container">
+          {this.state.bookingComplete &&
+          
+          <div className="success">
+            <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
+          </div>  
+          }
+
             <SearchForm
-              dateChange={this.handleDateChange}
-              dateValue={this.state.date}
-              handleClick={this.searchForVacantSeatings}
-            />
-          )}
+                dateChange={this.handleDateChange}
+                dateValue={this.state.date}
+                handleClick={this.searchForVacantSeatings}
+              />
+          
+          
+          {this.state.chooseSeating && 
+          <SeatingForm  seatingTimes = {this.state.seatingTimes}
+                        chosenSeating = {this.state.chosenSeating}
+                        handleChange={this.handleChange}
+                        handleClick = {this.proceedBooking} /> }
+        
+          <div className="error">
+            <p>{this.state.error}</p>
+          </div>
+            
+            {this.state.gdpr && (
+              <Gdpr
+                handleClick={this.agreeGdpr}
+                handleCancel={this.cancelBooking}
+              />
+            )}
 
-          {this.state.chooseSeating && (
-            <SeatingForm
-              seatingTimes={this.state.seatingTimes}
-              chosenSeating={this.state.chosenSeating}
-              handleChange={this.handleChange}
-              handleClick={this.proceedBooking}
-            />
-          )}
-
-          {this.state.booking && (
-            <UserForm
-              handleChange={this.handleChange}
-              handleClick={this.book}
-              handleCancel={this.cancelBooking}
-            />
-          )}
+            {this.state.booking && (
+              <UserForm
+                handleChange={this.handleChange}
+                handleClick={this.validateBooking}
+                handleCancel={this.cancelBooking}
+              />
+            )}
+          </div>
         </React.Fragment>
       </div>
     );
