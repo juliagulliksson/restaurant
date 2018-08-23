@@ -105,11 +105,14 @@ select.form-control:not([size]):not([multiple]){
   font-size:150%;
   font-weight: bold;
 }
+/* Contact */ 
+.contact{
+  margin:30px 10px 10px 10px;
+}
 .images-contact ul li{
   margin:0px;
   display:inline;
   list-style:none;
-
 }
 .imagestyle{
   height:20%;
