@@ -1,6 +1,6 @@
 import React from "react";
-//import ButtonDelete from "./ButtonDelete";
-//import ButtonEdit from "./ButtonEdit";
+import ButtonDelete from "./ButtonDelete";
+import ButtonEdit from "./ButtonEdit";
 
 class BookingRow extends React.Component {
   render() {
@@ -14,8 +14,8 @@ class BookingRow extends React.Component {
         <td>{booking.name}</td>
         <td>{booking.userPhone}</td>
         <td>{booking.email}</td>
-        <td>{/*<ButtonDelete />*/}</td>
-        <td>{/*<ButtonEdit />*/}</td>
+        <td>{<ButtonDelete>Delete</ButtonDelete>}</td>
+        <td>{<ButtonEdit>Edit</ButtonEdit>}</td>
       </tr>
     );
   }
