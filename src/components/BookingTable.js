@@ -13,7 +13,14 @@ class BookingTable extends React.Component {
     rows = this.props.bookings
       .filter(booking => {
         return (
-          booking.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+          booking.name.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+            -1 ||
+          booking.phone.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+            -1 ||
+          booking.email.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+            -1 ||
+          booking.bookingId.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+            -1
         );
       })
       .map(booking => (
@@ -26,7 +33,7 @@ class BookingTable extends React.Component {
 
     // addBookingToState = () => {
     //   this.setState({
-    //     bookingId: booking.booking.Id,
+    //     bookingId: booking.bookingId,
     //     date: booking.date,
     //     name: booking.name,
     //     phone: booking.phone,
