@@ -31,18 +31,6 @@ class BookingTable extends React.Component {
         />
       ));
 
-    // addBookingToState = () => {
-    //   this.setState({
-    //     bookingId: booking.bookingId,
-    //     date: booking.date,
-    //     name: booking.name,
-    //     phone: booking.phone,
-    //     seatingOne: booking.seatingOne,
-    //     seatingTwo: booking.seatingTwo,
-    //     email: booking.email
-    //   });
-    // };
-
     return (
       <div>
         <table>
