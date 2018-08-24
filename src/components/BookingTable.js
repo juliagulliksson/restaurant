@@ -16,7 +16,25 @@ class BookingTable extends React.Component {
           booking.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
         );
       })
-      .map(booking => <BookingRow key={booking.bookingId} booking={booking} />);
+      .map(booking => (
+        <BookingRow
+          key={booking.bookingId}
+          booking={booking}
+          deleteBooking={this.props.deleteBooking}
+        />
+      ));
+
+    // addBookingToState = () => {
+    //   this.setState({
+    //     bookingId: booking.booking.Id,
+    //     date: booking.date,
+    //     name: booking.name,
+    //     phone: booking.phone,
+    //     seatingOne: booking.seatingOne,
+    //     seatingTwo: booking.seatingTwo,
+    //     email: booking.email
+    //   });
+    // };
 
     return (
       <div>
