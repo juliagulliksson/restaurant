@@ -9,12 +9,17 @@ header("Access-Control-Allow-Headers: Content-Type, Accept");
 
 //$formData = json_decode($_GET["formData"], false);
 
+// Query returns bookings for current date and future dates.
+// No past dates will be returned. Do we want to look at old bookings?
+
 $statement = $pdo->prepare(
 "SELECT * FROM booking
 JOIN users 
 ON booking.userPhone = users.phone
 WHERE DATE(booking.date) >= CURDATE()
 ORDER BY booking.date, booking.seatingTwo");
+
+
 
 $statement->execute();
 

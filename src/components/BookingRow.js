@@ -1,10 +1,19 @@
 import React from "react";
-import ButtonDelete from "./ButtonDelete";
-import ButtonEdit from "./ButtonEdit";
 
 class BookingRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick = () => {
+    console.log("click");
+    this.props.deleteBooking(this.props.booking.phone);
+  };
+
   render() {
     const booking = this.props.booking;
+    //const phone = this.props.phone;
 
     return (
       <tr>
@@ -14,8 +23,21 @@ class BookingRow extends React.Component {
         <td>{booking.name}</td>
         <td>{booking.userPhone}</td>
         <td>{booking.email}</td>
-        <td>{<ButtonDelete>Delete</ButtonDelete>}</td>
-        <td>{<ButtonEdit>Edit</ButtonEdit>}</td>
+        <td>
+          <button
+            /*handleClick={this.agreeGdpr}*/ className="btn btn-secondary"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            onClick={() => this.props.deleteBooking(booking.userPhone)}
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     );
   }

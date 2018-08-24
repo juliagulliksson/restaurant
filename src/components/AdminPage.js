@@ -17,8 +17,16 @@ class AdminPage extends React.Component {
     super(props);
     this.state = {
       bookings: [],
-      searchInput: ""
+      searchInput: "",
+      bookingId: "",
+      date: "",
+      name: "",
+      phone: "",
+      seatingOne: "",
+      seatingTwo: "",
+      email: ""
     };
+
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
   }
 
@@ -44,6 +52,38 @@ class AdminPage extends React.Component {
       });
   };
 
+  deleteBooking = phone => {
+    let newBookings = "";
+    let formValues = JSON.stringify(phone);
+
+    fetch(
+      "http://localhost/restaurant/src/components/php/deletebooking.php?formData=" +
+        formValues,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json"
+        }
+      }
+    )
+      .then(() => {
+        newBookings = this.state.bookings.filter(
+          booking => booking.userPhone !== phone
+        );
+      })
+      .then(() => {
+        this.state.bookings.map(booking =>
+          this.setState({
+            bookings: newBookings
+          })
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   render() {
     return (
       <div>
@@ -54,6 +94,7 @@ class AdminPage extends React.Component {
         <BookingTable
           bookings={this.state.bookings}
           searchInput={this.state.searchInput}
+          deleteBooking={this.deleteBooking}
         />
       </div>
     );
