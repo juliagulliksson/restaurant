@@ -7,7 +7,7 @@ export default function BookATable() {
     <div>
       <h1>Book a table</h1>
       <p>Book a table here</p>
-      <Book />
+      <Book/>
     </div>
   );
 }
