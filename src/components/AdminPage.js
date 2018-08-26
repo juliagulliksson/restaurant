@@ -10,6 +10,7 @@ import BookingSearchBox from "./BookingSearchBox";
 **  ├── BookingSearchBox
 **  └── BookingTable
 **      └── BookingRow 
+**          └── DeleteBookingModal
 */
 
 class AdminPage extends React.Component {
