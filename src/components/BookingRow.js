@@ -1,25 +1,47 @@
 import React from "react";
 import DeleteBookingModal from "./DeleteBookingModal";
+import EditBookingModal from "./EditBookingModal";
+import Date from "../uiElements/DatePicker";
 
 class BookingRow extends React.Component {
- 
-  state = { show: false };
-
-  showModal = () => {
-    this.setState({ show: true });
+  state = {
+    showDelete: false,
+    showEdit: false
   };
 
-  hideModal = () => {
-    this.setState({ show: false });
+  onDateChange = date => {
+    console.log(date);
   };
 
-  handleClick = () => {
-    this.setState({ show: false });
+  showDeleteModal = () => {
+    this.setState({ showDelete: true });
+  };
+
+  hideDeleteModal = () => {
+    this.setState({ showDelete: false });
+  };
+
+  showEditModal = () => {
+    this.setState({ showEdit: true });
+  };
+
+  hideEditModal = () => {
+    this.setState({ showEdit: false });
+  };
+
+  handleDelete = () => {
+    this.setState({ showDelete: false });
     this.props.deleteBooking(
       this.props.booking.phone,
       this.props.booking.bookingId
     );
   };
+
+  handleEdit = () => {
+    console.log("EditFunction");
+  };
+
+  handleFormChange = () => {};
 
   render() {
     const booking = this.props.booking;
@@ -33,13 +55,22 @@ class BookingRow extends React.Component {
         <td>{booking.userPhone}</td>
         <td>{booking.email}</td>
         <td>
-          <button className="btn btn-secondary">Edit</button>
+          <EditBookingModal
+            show={this.state.showEdit}
+            handleClose={this.hideEditModal}
+            handleConfirm={this.handleEdit}
+          >
+            <p>Booking ID: {booking.bookingId}</p>
+          </EditBookingModal>
+          <button onClick={this.showEditModal} className="btn btn-secondary">
+            Edit
+          </button>
         </td>
         <td>
           <DeleteBookingModal
-            show={this.state.show}
-            handleClose={this.hideModal}
-            handleConfirm={this.handleClick}
+            show={this.state.showDelete}
+            handleClose={this.hideDeleteModal}
+            handleConfirm={this.handleDelete}
           >
             <p>Booking ID: {booking.bookingId}</p>
             <p>Date: {booking.date}</p>
@@ -48,7 +79,7 @@ class BookingRow extends React.Component {
             <p>Phone: {booking.userPhone}</p>
             <p>Email: {booking.email}</p>
           </DeleteBookingModal>
-          <button onClick={this.showModal} className="btn btn-danger">
+          <button onClick={this.showDeleteModal} className="btn btn-danger">
             Delete
           </button>
         </td>

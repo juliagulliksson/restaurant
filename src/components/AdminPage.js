@@ -1,8 +1,6 @@
 import React from "react";
 import BookingTable from "./BookingTable";
 import BookingSearchBox from "./BookingSearchBox";
-//import ButtonEdit from "./ButtonEdit";
-//import ButtonDelete from "./ButtonDelete";
 
 /* ADMIN PAGE FILE STRUCTURE:
 **
@@ -16,32 +14,27 @@ import BookingSearchBox from "./BookingSearchBox";
 */
 
 class AdminPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bookings: [],
-      searchInput: "",
-      bookingId: "",
-      date: "",
-      name: "",
-      phone: "",
-      seatingOne: "",
-      seatingTwo: "",
-      email: ""
-    };
-
-    this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
-  }
+  state = {
+    bookings: [],
+    searchInput: "",
+    bookingId: "",
+    date: "",
+    name: "",
+    phone: "",
+    seatingOne: "",
+    seatingTwo: "",
+    email: ""
+  };
 
   componentDidMount() {
     this.getBookingsFromApi();
   }
 
-  handleSearchInputChange(searchInput) {
+  handleSearchInputChange = searchInput => {
     this.setState({
       searchInput: searchInput
     });
-  }
+  };
 
   getBookingsFromApi = () => {
     fetch("http://localhost/restaurant/src/components/php/fetchbookings.php")
