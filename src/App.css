@@ -2,10 +2,10 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
-.header-image{
+.header-image {
   height: 400px;
   background-size: cover;
-  background-image: url('images/restaurantbild.jpeg');
+  background-image: url("images/restaurantbild.jpeg");
   position: relative;
   text-align: center;
   background-position: 0px -100px;
@@ -27,24 +27,26 @@ body{
 
 .search-container {
   width: 100%;
-}
+  }
 
-.form-container{
+.form-container {
   width: 30%;
   margin: 0 auto;
   text-align: center;
 }
 
-.btn-light, .btn-light:hover, .btn-light:active {
+.btn-light,
+.btn-light:hover,
+.btn-light:active {
   border: 1px solid black;
 }
 
-select.form-control:not([size]):not([multiple]){
+select.form-control:not([size]):not([multiple]) {
   padding-right: 6em;
   margin-right: 1em;
 }
 
-.error p{
+.error p {
   color: rgb(163, 6, 6);
   font-weight: 700;
 }
@@ -81,47 +83,72 @@ select.form-control:not([size]):not([multiple]){
   font-size: large;
 }
 /* Navigation Bar */
-.title{
-  background-color:black;
+.title {
+  background-color: black;
 }
-.title h1{
-  background-color:black;
-  color:white;
-  padding:50px;
-  height:100%;
-  font-size:300%;
+.title h1 {
+  background-color: black;
+  color: white;
+  padding: 50px;
+  height: 100%;
+  font-size: 300%;
 }
-.navbar{
-  background-color:white;
+.navbar {
+  background-color: white;
   border-style: solid;
   border-width: 5px;
-  color:black;
+  color: black;
   margin: 0;
 }
-.navbar li{
-  padding:20px;
-  display:flex;
+.navbar li {
+  padding: 20px;
+  display: flex;
   justify-content: center;
-  
 }
-.navbar li a{
-  color:black;
-  font-size:150%;
+.navbar li a {
+  color: black;
+  font-size: 150%;
   font-weight: bold;
 }
-/* Contact */ 
+/* Contact */
+.contact {
+  margin: 30px 10px 10px 10px;
+}
+.images-contact ul li {
+  margin: 0px;
+  display: inline;
+  list-style: none;
+}
+.imagestyle {
+  height: 20%;
+  width: 30%;
+}
 /* Footer */
-footer ul{
+footer ul {
   border-style: solid;
   border-width: 5px;
-  padding:10px;
-  width: 100%; 
+  padding: 10px;
+  width: 100%;
   height: 100%;
 }
-footer ul li{
-  list-style:none;
+footer ul li {
+  list-style: none;
 }
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal */
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
 }
