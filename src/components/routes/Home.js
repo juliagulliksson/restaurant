@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-//import Header from '../Header';
-import SearchForm from '../SearchForm';
+import SearchForm from '../../uiElements/SearchForm';
 import moment from 'moment';
 
 export default class Home extends Component {

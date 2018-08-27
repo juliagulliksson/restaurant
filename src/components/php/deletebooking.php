@@ -7,12 +7,15 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Accept");
 
 
-$user_phone = JSON_decode($_GET['formData']);
+$booking_data = JSON_decode($_GET['data']);
 
-$statement2 = $pdo->prepare("DELETE FROM users WHERE phone = '$user_phone'");
+$phone = $booking_data->phone;
+$booking_id = $booking_data->bookingId;
+
+$statement2 = $pdo->prepare("DELETE FROM users WHERE phone = '$phone'");
 $statement2->execute();
 
-$statement = $pdo->prepare("DELETE FROM booking WHERE userPhone = '$user_phone'");
+$statement = $pdo->prepare("DELETE FROM booking WHERE bookingId = '$booking_id'");
 $statement->execute();
 
 

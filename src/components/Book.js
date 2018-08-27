@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import SeatingForm from "./SeatingForm";
-import Gdpr from "../uiElements/gdpr";
-import UserForm from "./UserForm";
-import SearchForm from "./SearchForm";
+import SeatingForm from "../uiElements/SeatingForm";
+import Gdpr from "../uiElements/Gdpr";
+import UserForm from "../uiElements/UserForm";
+import SearchForm from "../uiElements/SearchForm";
 import moment from 'moment';
+import Button from '../uiElements/Button';
 
 class Book extends Component {
   state = {
     date: localStorage.getItem('date'),
-    chooseSeating: false,
+    chooseSeating: true,
     name: "",
     email: "",
     phone: "",
@@ -19,7 +20,8 @@ class Book extends Component {
     chosenSeating: "",
     booking: false,
     bookingComplete: false,
-    error: ""
+    error: "",
+    changeDate: false
   };
 
   handleChange = event => {
@@ -28,10 +30,12 @@ class Book extends Component {
   };
 
   handleDateChange = (date) => {
-    const selectedDate = date;
-    selectedDate.format("YYYY-MM-DD")
-    this.setState({ date: selectedDate });
+    this.setState({ date: date });
   }; 
+
+  changeDate = () => {
+    this.setState({ changeDate: true, chooseSeating: false });
+  }
 
   searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
@@ -120,12 +124,13 @@ class Book extends Component {
       }
     )
     .then(() => {
-        this.setState({
-          error: "",
-          bookingComplete: true,
-          booking: false,
-          chooseSeating: false})
-      });
+      this.setState({
+        error: "",
+        bookingComplete: true,
+        booking: false,
+        chooseSeating: false,
+        changeDate: false})
+    });
   }
 
   render() {
@@ -138,26 +143,32 @@ class Book extends Component {
       <div>
        
         <React.Fragment>
-        <div className="form-container">
+        
           {this.state.bookingComplete &&
           
           <div className="success">
             <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
           </div>  
           }
-
-              <SearchForm
-               handleChange={this.handleDateChange}
-                dateValue={moment(this.state.date)}
-                handleClick={this.searchForVacantSeatings}
-                className="search-container"
-              />  
-          {!this.state.bookingComplete &&
+          {!this.state.changeDate && !this.state.bookingComplete && 
+           <Button handleClick={this.changeDate}>Change date</Button>
+          }
+         
+          {this.state.changeDate && 
+          <SearchForm handleChange={this.handleDateChange}
+                      dateValue={moment(this.state.date)}
+                      handleClick={this.searchForVacantSeatings}
+                      className="search-container"
+          />
+          }
+          
+          <div className="form-container">
+          {this.state.chooseSeating &&
           
           <SeatingForm  seatingTimes = {this.state.seatingTimes}
-          chosenSeating = {this.state.chosenSeating}
-          handleChange={this.handleChange}
-          handleClick = {this.proceedBooking} /> 
+                        chosenSeating = {this.state.chosenSeating}
+                        handleChange={this.handleChange}
+                        handleClick = {this.proceedBooking} /> 
           }
          
           <div className="error">
