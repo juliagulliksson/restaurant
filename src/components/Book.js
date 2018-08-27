@@ -69,10 +69,10 @@ class Book extends Component {
   }
 
   proceedBooking = () => {
-    if(this.state.chosenSeating !== ""){
+    if (this.state.chosenSeating !== "") {
       this.setState({ error: "", gdpr: true });
     } else {
-      this.setState({error: "Please choose a seating time"})
+      this.setState({ error: "Please choose a seating time" })
     }
   };
 
@@ -85,23 +85,23 @@ class Book extends Component {
     })
   }
 
-  validateEmail = (email) => {
-    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
-      return true
-    }
-    return false
-  }
+  // validateEmail = (email) => {
+  //   if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
+  //     return true
+  //   }
+  //   return false
+  // }
 
   validateBooking = () => {
-    if(this.validateEmail(this.state.email)){
-      if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
-        this.book();
-      } else {
-        this.setState({error: "Please enter the required fields"})
-      }
+    // if(this.validateEmail(this.state.email)){
+    if (this.state.name !== "" && this.state.email !== "" && this.state.phone !== "") {
+      this.book();
     } else {
-      this.setState({error: "Please enter a valid email adress"});
+      this.setState({ error: "Please enter the required fields" })
     }
+    // } else {
+    //   this.setState({error: "Please enter a valid email adress"});
+    // }
   };
 
   book = () => {
@@ -122,12 +122,41 @@ class Book extends Component {
           error: "",
           bookingComplete: true,
           booking: false,
-          chooseSeating: false})
+          chooseSeating: false
+        })
       });
+    this.mail();
+  }
+
+  mail = () => {
+
+    let mailValues = JSON.stringify({
+      "name": this.state.name,
+      "email": this.state.email,
+      "phone": this.state.phone,
+      "date": this.state.date
+    }
+    )
+
+    fetch(
+      "http://localhost/restaurant/src/components/php/mail.php?mailData=" +
+      mailValues,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "text/plain"
+        }
+      }
+    )
+      .then(response => response.text())
+      .then(response => {
+        console.log(response);
+      })
   }
 
   render() {
-   
+
     let seating;
     this.state.chosenSeating === "firstSeating"
       ? (seating = "18:00")
@@ -135,33 +164,33 @@ class Book extends Component {
 
     return (
       <div>
-       
+
         <React.Fragment>
-        <div className="form-container">
-          {this.state.bookingComplete &&
-          
-          <div className="success">
-            <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
-          </div>  
-          }
+          <div className="form-container">
+            {this.state.bookingComplete &&
+
+              <div className="success">
+                <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
+              </div>
+            }
 
             <SearchForm
-                dateChange={this.handleDateChange}
-                dateValue={this.state.date}
-                handleClick={this.searchForVacantSeatings}
-              />
-          
-          
-          {this.state.chooseSeating && 
-          <SeatingForm  seatingTimes = {this.state.seatingTimes}
-                        chosenSeating = {this.state.chosenSeating}
-                        handleChange={this.handleChange}
-                        handleClick = {this.proceedBooking} /> }
-        
-          <div className="error">
-            <p>{this.state.error}</p>
-          </div>
-            
+              dateChange={this.handleDateChange}
+              dateValue={this.state.date}
+              handleClick={this.searchForVacantSeatings}
+            />
+
+
+            {this.state.chooseSeating &&
+              <SeatingForm seatingTimes={this.state.seatingTimes}
+                chosenSeating={this.state.chosenSeating}
+                handleChange={this.handleChange}
+                handleClick={this.proceedBooking} />}
+
+            <div className="error">
+              <p>{this.state.error}</p>
+            </div>
+
             {this.state.gdpr && (
               <Gdpr
                 handleClick={this.agreeGdpr}
