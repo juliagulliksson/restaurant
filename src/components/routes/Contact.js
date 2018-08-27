@@ -13,6 +13,11 @@ export default function Contact() {
           Specialized on Swedish delicatessen 
           we serve our best version of swedish high cuisine. 
           Reinventing traditional swedish dishes into new high cuisine.
+          The new management at Little Italy has gone back to Mediterranean 
+          cuisine with an Italian emphasis, for which the restaurant has always 
+          been identified. The gastronomic offering is complemented by a wine 
+          list of over 50 varieties from the best vineyards in the country.
+          We sell you whatever we want as long as the design.
       </p>
     </div>
   <div className="images-contact">
