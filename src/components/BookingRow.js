@@ -19,7 +19,10 @@ class BookingRow extends React.Component {
 
   handleClick = () => {
     this.setState({ show: false });
-    this.props.deleteBooking(this.props.booking.phone);
+    this.props.deleteBooking(
+      this.props.booking.phone,
+      this.props.booking.bookingId
+    );
   };
 
   render() {
