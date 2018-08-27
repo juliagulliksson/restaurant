@@ -20,16 +20,12 @@ body{
   transform: translate(-50%, -50%);
 }
 
-.home-search-container form{
+.home-search-container form, .search-container form{
   width: 55%;
   margin: 0px auto;
 }
 
-.search-container {
-  width: 100%;
-  }
-
-.form-container {
+.form-container{
   width: 30%;
   margin: 0 auto;
   text-align: center;
