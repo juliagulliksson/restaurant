@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteBookingModal from "./DeleteBookingModal";
 import EditBookingModal from "./EditBookingModal";
-import Date from "../uiElements/DatePicker";
+import EditBookingForm from "../uiElements/EditBookingForm";
 
 class BookingRow extends React.Component {
   state = {
@@ -61,6 +61,10 @@ class BookingRow extends React.Component {
             handleConfirm={this.handleEdit}
           >
             <p>Booking ID: {booking.bookingId}</p>
+            <EditBookingForm
+              booking={booking}
+              onDateChange={this.onDateChange}
+            />
           </EditBookingModal>
           <button onClick={this.showEditModal} className="btn btn-secondary">
             Edit
