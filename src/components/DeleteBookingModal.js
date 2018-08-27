@@ -11,7 +11,7 @@ class DeleteBookingModal extends React.Component {
         className={
           this.props.show ? "modal display-block" : "modal display-none"
         }
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
       >
         <div className="modal-dialog" role="document">
