@@ -10,7 +10,9 @@ import BookingSearchBox from "./BookingSearchBox";
 **  ├── BookingSearchBox
 **  └── BookingTable
 **      └── BookingRow 
-**          └── DeleteBookingModal
+**          ├── DeleteBookingModal
+**          └── EditBookingModal
+**              └── EditBookingForm
 */
 
 class AdminPage extends React.Component {
@@ -53,13 +55,14 @@ class AdminPage extends React.Component {
       });
   };
 
-  deleteBooking = phone => {
+  deleteBooking = (phone, bookingId) => {
     let newBookings = "";
-    let formValues = JSON.stringify(phone);
+
+    let bookingData = JSON.stringify({ phone: phone, bookId: bookingId });
 
     fetch(
-      "http://localhost/restaurant/src/components/php/deletebooking.php?formData=" +
-        formValues,
+      "http://localhost/restaurant/src/components/php/deletebooking.php?data=" +
+        bookingData,
       {
         method: "DELETE",
         headers: {
