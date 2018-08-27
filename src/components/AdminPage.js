@@ -1,14 +1,44 @@
 import React from "react";
-import AdminSearchForm from "./AdminSearchForm";
-import Button from "./Button";
+import BookingTable from "./BookingTable";
+import BookingSearchBox from "./BookingSearchBox";
+//import ButtonEdit from "./ButtonEdit";
+//import ButtonDelete from "./ButtonDelete";
+
+/* ADMIN PAGE FILE STRUCTURE:
+**
+**  AdminPage
+**  ├── BookingSearchBox
+**  └── BookingTable
+**      └── BookingRow 
+**          └── DeleteBookingModal
+*/
 
 class AdminPage extends React.Component {
-  state = {
-    bookings: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      bookings: [],
+      searchInput: "",
+      bookingId: "",
+      date: "",
+      name: "",
+      phone: "",
+      seatingOne: "",
+      seatingTwo: "",
+      email: ""
+    };
+
+    this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
+  }
 
   componentDidMount() {
     this.getBookingsFromApi();
+  }
+
+  handleSearchInputChange(searchInput) {
+    this.setState({
+      searchInput: searchInput
+    });
   }
 
   getBookingsFromApi = () => {
@@ -23,58 +53,50 @@ class AdminPage extends React.Component {
       });
   };
 
-  displayBookings = () => {
-    if (!this.state.bookings) {
-      console.log("No bookings found");
-      return;
-    } else {
-      return (
-        this.state.bookings
-          // .filter(booking => {
-          //   return booking.name === "Poodle"; //state variable for name
-          // })
-          .map(booking => {
-            return (
-              <tr key={booking.bookingId}>
-                <td>{booking.bookingId}</td>
-                <td>{booking.date}</td>
-                <td>{booking.seatingOne == 1 ? "18:00" : "21:00"}</td>
-                <td>{booking.name}</td>
-                <td>{booking.userPhone}</td>
-                <td>{booking.email}</td>
-                <td>
-                  <Button />
-                </td>
-                <td>
-                  <Button />
-                </td>
-              </tr>
-            );
+  deleteBooking = phone => {
+    let newBookings = "";
+    let formValues = JSON.stringify(phone);
+
+    fetch(
+      "http://localhost/restaurant/src/components/php/deletebooking.php?formData=" +
+        formValues,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json"
+        }
+      }
+    )
+      .then(() => {
+        newBookings = this.state.bookings.filter(
+          booking => booking.userPhone !== phone
+        );
+      })
+      .then(() => {
+        this.state.bookings.map(booking =>
+          this.setState({
+            bookings: newBookings
           })
-      );
-    }
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
     return (
       <div>
-        <AdminSearchForm />
-        <br />
-        <h2>Current Bookings</h2>
-        <br />
-        <table>
-          <tbody>
-            <tr>
-              <th>Booking ID</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-            </tr>
-          </tbody>
-          <tbody>{this.displayBookings()}</tbody>
-        </table>
+        <BookingSearchBox
+          searchInput={this.state.searchInput}
+          onSearchInputChange={this.handleSearchInputChange}
+        />
+        <BookingTable
+          bookings={this.state.bookings}
+          searchInput={this.state.searchInput}
+          deleteBooking={this.deleteBooking}
+        />
       </div>
     );
   }
