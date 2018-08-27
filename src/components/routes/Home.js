@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 //import Header from '../Header';
 import SearchForm from '../SearchForm';
 import moment from 'moment';
@@ -21,27 +21,27 @@ export default class Home extends Component {
   }
 
   navigateToPage = () => {
-    this.props.history.push({pathname: '/bookatable', query: {date: this.state.date}});
+    this.props.history.push({ pathname: '/bookatable', query: { date: this.state.date } });
   };
 
-  render(){
+  render() {
     return (
 
       <div>
         {/* <Header onClick={}/> */}
-  
+
         <React.Fragment>
           <div className="header-image">
-          <SearchForm  dateChange= {this.handleDateChange} 
-                      handleClick = {this.navigateToPage}  />
+            <SearchForm dateChange={this.handleDateChange}
+              handleClick={this.navigateToPage} />
           </div>
-      
+
         </React.Fragment>
         <h1>Home</h1>
         <p>This is the home page.</p>
-      </div> 
+      </div>
     );
 
   }
- 
+
 }

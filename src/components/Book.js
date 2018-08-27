@@ -69,10 +69,10 @@ class Book extends Component {
   }
 
   proceedBooking = () => {
-    if(this.state.chosenSeating !== ""){
+    if (this.state.chosenSeating !== "") {
       this.setState({ error: "", gdpr: true });
     } else {
-      this.setState({error: "Please choose a seating time"})
+      this.setState({ error: "Please choose a seating time" })
     }
   };
 
@@ -86,21 +86,21 @@ class Book extends Component {
   }
 
   validateEmail = (email) => {
-    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
+    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)) {
       return true
     }
     return false
   }
 
   validateBooking = () => {
-    if(this.validateEmail(this.state.email)){
-      if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
+    if (this.validateEmail(this.state.email)) {
+      if (this.state.name !== "" && this.state.email !== "" && this.state.phone !== "") {
         this.book();
       } else {
-        this.setState({error: "Please enter the required fields"})
+        this.setState({ error: "Please enter the required fields" })
       }
     } else {
-      this.setState({error: "Please enter a valid email adress"});
+      this.setState({ error: "Please enter a valid email adress" });
     }
   };
 
@@ -122,12 +122,13 @@ class Book extends Component {
           error: "",
           bookingComplete: true,
           booking: false,
-          chooseSeating: false})
+          chooseSeating: false
+        })
       });
   }
 
   render() {
-   
+
     let seating;
     this.state.chosenSeating === "firstSeating"
       ? (seating = "18:00")
@@ -135,33 +136,33 @@ class Book extends Component {
 
     return (
       <div>
-       
+
         <React.Fragment>
-        <div className="form-container">
-          {this.state.bookingComplete &&
-          
-          <div className="success">
-            <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
-          </div>  
-          }
+          <div className="form-container">
+            {this.state.bookingComplete &&
+
+              <div className="success">
+                <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
+              </div>
+            }
 
             <SearchForm
-                dateChange={this.handleDateChange}
-                dateValue={this.state.date}
-                handleClick={this.searchForVacantSeatings}
-              />
-          
-          
-          {this.state.chooseSeating && 
-          <SeatingForm  seatingTimes = {this.state.seatingTimes}
-                        chosenSeating = {this.state.chosenSeating}
-                        handleChange={this.handleChange}
-                        handleClick = {this.proceedBooking} /> }
-        
-          <div className="error">
-            <p>{this.state.error}</p>
-          </div>
-            
+              dateChange={this.handleDateChange}
+              dateValue={this.state.date}
+              handleClick={this.searchForVacantSeatings}
+            />
+
+
+            {this.state.chooseSeating &&
+              <SeatingForm seatingTimes={this.state.seatingTimes}
+                chosenSeating={this.state.chosenSeating}
+                handleChange={this.handleChange}
+                handleClick={this.proceedBooking} />}
+
+            <div className="error">
+              <p>{this.state.error}</p>
+            </div>
+
             {this.state.gdpr && (
               <Gdpr
                 handleClick={this.agreeGdpr}
