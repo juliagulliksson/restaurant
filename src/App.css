@@ -1,9 +1,5 @@
-.search-container{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+body{
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header-image{
@@ -16,13 +12,21 @@
   background-attachment: fixed;
 }
 
-.search-container form{
+.home-search-container{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-search-container form{
   width: 55%;
   margin: 0px auto;
 }
 
-body{
-  font-family: 'Montserrat', sans-serif;
+.search-container {
+  width: 100%;
 }
 
 .form-container{

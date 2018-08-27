@@ -18,15 +18,14 @@ export default class Home extends Component {
     let date = moment().format("YYYY-MM-DD");
     localStorage.setItem('date', date);
     return (
-     
 
       <div>
-        {/* <Header onClick={}/> */}
-  
         <React.Fragment>
           <div className="header-image">
-          <SearchForm  dateChange= {this.handleDateChange} 
-                      handleClick = {this.navigate}  />
+          <SearchForm handleChange= {this.handleDateChange} 
+                      handleClick = {this.navigate}
+                      dateValue= {moment()}
+                      className={"home-search-container"}  />
           </div>
 
         </React.Fragment>

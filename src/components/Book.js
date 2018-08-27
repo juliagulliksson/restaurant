@@ -3,6 +3,7 @@ import SeatingForm from "./SeatingForm";
 import Gdpr from "../uiElements/gdpr";
 import UserForm from "./UserForm";
 import SearchForm from "./SearchForm";
+import moment from 'moment';
 
 class Book extends Component {
   state = {
@@ -26,10 +27,11 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  /* handleDateChange = date => {
-    const selectedDate = date.format("YYYY-MM-DD");
+  handleDateChange = (date) => {
+    const selectedDate = date;
+    selectedDate.format("YYYY-MM-DD")
     this.setState({ date: selectedDate });
-  }; */
+  }; 
 
   searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
@@ -117,8 +119,7 @@ class Book extends Component {
         }
       }
     )
-      .then(() => {
-        console.log(this.state);
+    .then(() => {
         this.setState({
           error: "",
           bookingComplete: true,
@@ -128,7 +129,6 @@ class Book extends Component {
   }
 
   render() {
-    //console.log(this.state);
     let seating;
     this.state.chosenSeating === "firstSeating"
       ? (seating = "18:00")
@@ -146,11 +146,12 @@ class Book extends Component {
           </div>  
           }
 
-           {/*  <SearchForm
-                dateChange={this.handleDateChange}
-                dateValue={this.state.date}
+              <SearchForm
+               handleChange={this.handleDateChange}
+                dateValue={moment(this.state.date)}
                 handleClick={this.searchForVacantSeatings}
-              /> */}
+                className="search-container"
+              />  
           {!this.state.bookingComplete &&
           
           <SeatingForm  seatingTimes = {this.state.seatingTimes}
