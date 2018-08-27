@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import SeatingForm from "./SeatingForm";
 import Gdpr from "../uiElements/gdpr";
 import UserForm from "./UserForm";
-import moment from "moment";
 import SearchForm from "./SearchForm";
+import moment from 'moment';
 
 class Book extends Component {
   state = {
-    date: moment().format("YYYY-MM-DD"),
+    date: localStorage.getItem('date'),
     chooseSeating: false,
     name: "",
     email: "",
@@ -27,10 +27,11 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  /* handleDateChange = date => {
-    const selectedDate = date.format("YYYY-MM-DD");
+  handleDateChange = (date) => {
+    const selectedDate = date;
+    selectedDate.format("YYYY-MM-DD")
     this.setState({ date: selectedDate });
-  }; */
+  }; 
 
   searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
@@ -85,23 +86,24 @@ class Book extends Component {
     })
   }
 
-  validateEmail = (email) => {
+  /* validateEmail = (email) => {
     if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
       return true
     }
     return false
-  }
+  } */
 
   validateBooking = () => {
-    if(this.validateEmail(this.state.email)){
+    console.log(this.state.email)
+   /*  if(this.validateEmail(this.state.email)){ */
       if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
         this.book();
       } else {
         this.setState({error: "Please enter the required fields"})
       }
-    } else {
+   /*  } else {
       this.setState({error: "Please enter a valid email adress"});
-    }
+    } */
   };
 
   book = () => {
@@ -117,7 +119,7 @@ class Book extends Component {
         }
       }
     )
-      .then(() => {
+    .then(() => {
         this.setState({
           error: "",
           bookingComplete: true,
@@ -127,7 +129,6 @@ class Book extends Component {
   }
 
   render() {
-   
     let seating;
     this.state.chosenSeating === "firstSeating"
       ? (seating = "18:00")
@@ -145,19 +146,20 @@ class Book extends Component {
           </div>  
           }
 
-            <SearchForm
-                dateChange={this.handleDateChange}
-                dateValue={this.state.date}
+              <SearchForm
+               handleChange={this.handleDateChange}
+                dateValue={moment(this.state.date)}
                 handleClick={this.searchForVacantSeatings}
-              />
+                className="search-container"
+              />  
+          {!this.state.bookingComplete &&
           
-          
-          {this.state.chooseSeating && 
           <SeatingForm  seatingTimes = {this.state.seatingTimes}
-                        chosenSeating = {this.state.chosenSeating}
-                        handleChange={this.handleChange}
-                        handleClick = {this.proceedBooking} /> }
-        
+          chosenSeating = {this.state.chosenSeating}
+          handleChange={this.handleChange}
+          handleClick = {this.proceedBooking} /> 
+          }
+         
           <div className="error">
             <p>{this.state.error}</p>
           </div>
