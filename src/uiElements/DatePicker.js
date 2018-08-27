@@ -13,7 +13,7 @@ export default class Date extends React.Component {
     this.setState({
       startDate: date
     });
-    this.props.handleChange(date);
+    this.props.handleChange(date._i);
   }
 
   render() {

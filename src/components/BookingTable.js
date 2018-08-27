@@ -2,9 +2,6 @@ import React from "react";
 import BookingRow from "./BookingRow";
 
 class BookingTable extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const searchInput = this.props.searchInput;

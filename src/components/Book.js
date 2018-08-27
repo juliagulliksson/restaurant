@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import SeatingForm from "./SeatingForm";
-import Gdpr from "../uiElements/gdpr";
-import UserForm from "./UserForm";
-import SearchForm from "./SearchForm";
+import SeatingForm from "../uiElements/SeatingForm";
+import Gdpr from "../uiElements/Gdpr";
+import UserForm from "../uiElements/UserForm";
+import SearchForm from "../uiElements/SearchForm";
 import moment from 'moment';
-import Button from './Button';
+import Button from '../uiElements/Button';
 
 class Book extends Component {
   state = {
@@ -30,9 +30,7 @@ class Book extends Component {
   };
 
   handleDateChange = (date) => {
-    const selectedDate = date;
-    selectedDate.format("YYYY-MM-DD")
-    this.setState({ date: selectedDate });
+    this.setState({ date: date });
   }; 
 
   changeDate = () => {
@@ -126,13 +124,13 @@ class Book extends Component {
       }
     )
     .then(() => {
-        this.setState({
-          error: "",
-          bookingComplete: true,
-          booking: false,
-          chooseSeating: false,
-          changeDate: false})
-      });
+      this.setState({
+        error: "",
+        bookingComplete: true,
+        booking: false,
+        chooseSeating: false,
+        changeDate: false})
+    });
   }
 
   render() {
@@ -152,7 +150,7 @@ class Book extends Component {
             <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
           </div>  
           }
-          {!this.state.changeDate && 
+          {!this.state.changeDate && !this.state.bookingComplete && 
            <Button handleClick={this.changeDate}>Change date</Button>
           }
          
