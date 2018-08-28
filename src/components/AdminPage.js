@@ -36,6 +36,26 @@ class AdminPage extends React.Component {
     });
   };
 
+  sendConfirmationEmail = bookingInfo => {
+    bookingInfo = JSON.stringify(bookingInfo);
+
+    fetch(
+      "http://localhost/restaurant/src/components/php/sendConfirmationEmail.php?data=" +
+        bookingInfo,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+      });
+  };
+
   getBookingsFromApi = () => {
     fetch("http://localhost/restaurant/src/components/php/fetchbookings.php")
       .then(response => response.json())
@@ -48,10 +68,14 @@ class AdminPage extends React.Component {
       });
   };
 
-  deleteBooking = (phone, bookingId) => {
+  deleteBooking = bookingInfo => {
     let newBookings = "";
+    console.log(bookingInfo);
 
-    let bookingData = JSON.stringify({ phone: phone, bookId: bookingId });
+    let bookingData = JSON.stringify({
+      phone: bookingInfo.phone,
+      bookId: bookingInfo.bookingId
+    });
 
     fetch(
       "http://localhost/restaurant/src/components/php/deletebooking.php?data=" +
@@ -66,7 +90,7 @@ class AdminPage extends React.Component {
     )
       .then(() => {
         newBookings = this.state.bookings.filter(
-          booking => booking.userPhone !== phone
+          booking => booking.userPhone !== bookingInfo.phone
         );
       })
       .then(() => {
@@ -75,6 +99,7 @@ class AdminPage extends React.Component {
             bookings: newBookings
           })
         );
+        this.sendConfirmationEmail(bookingInfo);
       })
       .catch(error => {
         console.log(error);

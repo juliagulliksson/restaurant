@@ -2,10 +2,10 @@ import React from "react";
 import BookingRow from "./BookingRow";
 
 class BookingTable extends React.Component {
-
   render() {
     const searchInput = this.props.searchInput;
     let rows = [];
+    //console.log(this.props.bookings);
 
     rows = this.props.bookings
       .filter(booking => {
