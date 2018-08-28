@@ -14,16 +14,37 @@ export default function EditBookingForm(props) {
         <Date value={moment(booking.date)} handleChange={props.onDateChange} />
 
         <br />
-        <label className="editField" htmlFor="seating">
-          Time
-        </label>
-        <input
-          className="editField"
-          type="text"
-          name="seating"
-          defaultValue={booking.seatingOne === 1 ? "18:00" : "21:00"}
-        />
+
+        <div className="form-check form-check-inline">
+          <label className="form-check-label">
+            <input
+              className="form-check-input"
+              type="radio"
+              value="firstSeating"
+              name="chosenSeating"
+              onChange={props.handleChange}
+              defaultChecked={booking.seatingOne === "1" ? true : false}
+            />
+            18:00
+          </label>
+        </div>
+
+        <div className="form-check form-check-inline">
+          <label className="form-check-label">
+            <input
+              className="form-check-input"
+              type="radio"
+              /*value="secondSeating"*/
+              name="chosenSeating"
+              onChange={props.handleChange}
+              defaultChecked={booking.seatingTwo === "1" ? true : false}
+            />
+            21:00
+          </label>
+        </div>
+
         <br />
+
         <label className="editField" htmlFor="name">
           Name
         </label>
