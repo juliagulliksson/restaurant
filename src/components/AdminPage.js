@@ -74,7 +74,7 @@ class AdminPage extends React.Component {
 
     let bookingData = JSON.stringify({
       phone: bookingInfo.phone,
-      bookId: bookingInfo.bookingId
+      bookingId: bookingInfo.bookingId
     });
 
     fetch(
