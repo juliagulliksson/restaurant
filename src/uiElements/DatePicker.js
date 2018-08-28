@@ -13,7 +13,9 @@ export default class Date extends React.Component {
     this.setState({
       startDate: date
     });
-    this.props.handleChange(date._i);
+    if(date !== null){
+      this.props.handleChange(date);
+    }
   }
 
   render() {
@@ -23,7 +25,6 @@ export default class Date extends React.Component {
           onChange={this.handleChange}
           name="date"
           className="form-control"
-
       />
     );
   }
