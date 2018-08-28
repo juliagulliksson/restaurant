@@ -3,12 +3,12 @@ import SeatingForm from "../uiElements/SeatingForm";
 import Gdpr from "../uiElements/Gdpr";
 import UserForm from "../uiElements/UserForm";
 import SearchForm from "../uiElements/SearchForm";
-import moment from 'moment';
-import Button from '../uiElements/Button';
+import moment from "moment";
+import Button from "../uiElements/Button";
 
 class Book extends Component {
   state = {
-    date: localStorage.getItem('date'),
+    date: localStorage.getItem("date"),
     chooseSeating: true,
     name: "",
     email: "",
@@ -29,19 +29,20 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleDateChange = (date) => {
+  handleDateChange = date => {
+    date = date.format("YYYY-MM-DD");
     this.setState({ date: date });
-  }; 
+  };
 
   changeDate = () => {
     this.setState({ changeDate: true, chooseSeating: false });
-  }
+  };
 
   searchForVacantSeatings = () => {
     let formValues = JSON.stringify(this.state.date);
     fetch(
       "http://localhost/restaurant/src/components/php/search.php?formData=" +
-      formValues,
+        formValues,
       {
         method: "GET",
         headers: {
@@ -70,14 +71,14 @@ class Book extends Component {
     this.setState({
       gdpr: false,
       booking: true
-    })
-  }
+    });
+  };
 
   proceedBooking = () => {
-    if(this.state.chosenSeating !== ""){
+    if (this.state.chosenSeating !== "") {
       this.setState({ error: "", gdpr: true });
     } else {
-      this.setState({error: "Please choose a seating time"})
+      this.setState({ error: "Please choose a seating time" });
     }
   };
 
@@ -87,8 +88,8 @@ class Book extends Component {
       chooseSeating: false,
       error: "",
       gdpr: false
-    })
-  }
+    });
+  };
 
   /* validateEmail = (email) => {
     if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
@@ -98,14 +99,18 @@ class Book extends Component {
   } */
 
   validateBooking = () => {
-    console.log(this.state.email)
-   /*  if(this.validateEmail(this.state.email)){ */
-      if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
-        this.book();
-      } else {
-        this.setState({error: "Please enter the required fields"})
-      }
-   /*  } else {
+    console.log(this.state.email);
+    /*  if(this.validateEmail(this.state.email)){ */
+    if (
+      this.state.name !== "" &&
+      this.state.email !== "" &&
+      this.state.phone !== ""
+    ) {
+      this.book();
+    } else {
+      this.setState({ error: "Please enter the required fields" });
+    }
+    /*  } else {
       this.setState({error: "Please enter a valid email adress"});
     } */
   };
@@ -114,7 +119,7 @@ class Book extends Component {
     let formValues = JSON.stringify(this.state);
     fetch(
       "http://localhost/restaurant/src/components/php/post.php?formData=" +
-      formValues,
+        formValues,
       {
         method: "GET",
         headers: {
@@ -122,16 +127,16 @@ class Book extends Component {
           "Content-Type": "text/plain"
         }
       }
-    )
-    .then(() => {
+    ).then(() => {
       this.setState({
         error: "",
         bookingComplete: true,
         booking: false,
         chooseSeating: false,
-        changeDate: false})
+        changeDate: false
+      });
     });
-  }
+  };
 
   render() {
     let seating;
@@ -141,40 +146,43 @@ class Book extends Component {
 
     return (
       <div>
-       
         <React.Fragment>
-        
-          {this.state.bookingComplete &&
-          
-          <div className="success">
-            <p>Congratulations! You have booked a table at {this.state.date} {seating}</p>
-          </div>  
-          }
-          {!this.state.changeDate && !this.state.bookingComplete && 
-           <Button handleClick={this.changeDate}>Change date</Button>
-          }
-         
-          {this.state.changeDate && 
-          <SearchForm handleChange={this.handleDateChange}
-                      dateValue={moment(this.state.date)}
-                      handleClick={this.searchForVacantSeatings}
-                      className="search-container"
-          />
-          }
-          
+          {this.state.bookingComplete && (
+            <div className="success">
+              <p>
+                Congratulations! You have booked a table at {this.state.date}{" "}
+                {seating}
+              </p>
+            </div>
+          )}
+          {!this.state.changeDate &&
+            !this.state.bookingComplete && (
+              <Button handleClick={this.changeDate}>Change date</Button>
+            )}
+
+          {this.state.changeDate && (
+            <SearchForm
+              handleChange={this.handleDateChange}
+              dateValue={moment(this.state.date)}
+              handleClick={this.searchForVacantSeatings}
+              className="search-container"
+            />
+          )}
+
           <div className="form-container">
-          {this.state.chooseSeating &&
-          
-          <SeatingForm  seatingTimes = {this.state.seatingTimes}
-                        chosenSeating = {this.state.chosenSeating}
-                        handleChange={this.handleChange}
-                        handleClick = {this.proceedBooking} /> 
-          }
-         
-          <div className="error">
-            <p>{this.state.error}</p>
-          </div>
-            
+            {this.state.chooseSeating && (
+              <SeatingForm
+                seatingTimes={this.state.seatingTimes}
+                chosenSeating={this.state.chosenSeating}
+                handleChange={this.handleChange}
+                handleClick={this.proceedBooking}
+              />
+            )}
+
+            <div className="error">
+              <p>{this.state.error}</p>
+            </div>
+
             {this.state.gdpr && (
               <Gdpr
                 handleClick={this.agreeGdpr}
