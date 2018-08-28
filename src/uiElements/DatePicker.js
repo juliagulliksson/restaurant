@@ -6,13 +6,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 export default class Date extends React.Component {
   
   state = {
-    startDate: this.props.value
+    startDate: this.props.value,
+    error: false
   }
 
   handleChange = (date) => {
     this.setState({
       startDate: date
     });
+   
     if(date !== null){
       this.props.handleChange(date);
     }
@@ -20,12 +22,14 @@ export default class Date extends React.Component {
 
   render() {
     return (
+      
       <DatePicker
           selected={this.state.startDate}
           onChange={this.handleChange}
           name="date"
           className="form-control"
       />
+     
     );
   }
 }
