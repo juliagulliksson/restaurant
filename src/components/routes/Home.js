@@ -4,9 +4,9 @@ import moment from 'moment';
 
 export default class Home extends Component {
 
-  handleDateChange = date => {
-    const selectedDate = date.format("YYYY-MM-DD");
-    localStorage.setItem( 'date', selectedDate);
+  handleDateChange = (date) => {
+    date = date.format('YYYY-MM-DD');
+    localStorage.setItem( 'date', date);
   };
 
   navigate = () => {
