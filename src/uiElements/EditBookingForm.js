@@ -21,7 +21,7 @@ export default function EditBookingForm(props) {
           className="editField"
           type="text"
           name="seating"
-          defaultValue={booking.seatingOne == 1 ? "18:00" : "21:00"}
+          defaultValue={booking.seatingOne === 1 ? "18:00" : "21:00"}
         />
         <br />
         <label className="editField" htmlFor="name">

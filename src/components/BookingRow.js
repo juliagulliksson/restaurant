@@ -31,10 +31,20 @@ class BookingRow extends React.Component {
 
   handleDelete = () => {
     this.setState({ showDelete: false });
-    this.props.deleteBooking(
-      this.props.booking.phone,
-      this.props.booking.bookingId
-    );
+    let seatingTime;
+    this.props.booking.seatingOne === 1
+      ? (seatingTime = "18:00")
+      : (seatingTime = "21:00");
+
+    let bookingInfo = {
+      phone: this.props.booking.phone,
+      bookingId: this.props.booking.bookingId,
+      email: this.props.booking.email,
+      date: this.props.booking.date,
+      name: this.props.booking.name,
+      seatingTime: seatingTime
+    };
+    this.props.deleteBooking(bookingInfo);
   };
 
   handleEdit = () => {
