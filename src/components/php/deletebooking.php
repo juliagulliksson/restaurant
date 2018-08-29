@@ -7,15 +7,18 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Accept");
 
 
-$booking_data = JSON_decode($_GET['data']);
+$bookingData = JSON_decode($_GET['data']);
 
-$phone = $booking_data->phone;
-$booking_id = $booking_data->bookingId;
+//The bookingId from booking table is the id that's sent through with this object.
+
+$phone = $bookingData->phone;
+$bookingId = $bookingData->bookingId;
 
 $statement2 = $pdo->prepare("DELETE FROM users WHERE phone = '$phone'");
 $statement2->execute();
 
-$statement = $pdo->prepare("DELETE FROM booking WHERE bookingId = '$booking_id'");
+$statement = $pdo->prepare("DELETE FROM booking WHERE bookingId = '$bookingId'");
+
 $statement->execute();
 
 
