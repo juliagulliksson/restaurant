@@ -42,7 +42,7 @@ class Book extends Component {
     let formValues = JSON.stringify(this.state.date);
     fetch(
       "http://localhost/restaurant/src/components/php/search.php?formData=" +
-        formValues,
+      formValues,
       {
         method: "GET",
         headers: {
@@ -119,7 +119,7 @@ class Book extends Component {
     let formValues = JSON.stringify(this.state);
     fetch(
       "http://localhost/restaurant/src/components/php/post.php?formData=" +
-        formValues,
+      formValues,
       {
         method: "GET",
         headers: {
