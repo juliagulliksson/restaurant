@@ -104,7 +104,8 @@ class Book extends Component {
   }
 
   validateForm = () => {
-    if (this.state.name !== "" && this.state.email !== "" && this.state.phone !== "") {
+    if (this.state.name !== "" && this.state.email !== "" 
+    && this.state.phone !== "" && !isNaN(this.state.phone)) {
       return true;
     } return false;
   }
