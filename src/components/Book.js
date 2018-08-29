@@ -30,7 +30,15 @@ class Book extends Component {
   };
 
   handleDateChange = (date) => {
-    this.setState({ date: date });
+    let today = moment();
+    let selecedDate = moment(date);
+    if (selecedDate <= today) {
+      this.setState({ error: "This date is in the past. Try again!" })
+    } else {
+      date = date.format('YYYY-MM-DD');
+      localStorage.setItem( 'date', date); 
+      this.setState({ date: date, error: "" });
+    }
   }; 
 
   changeDate = () => {
@@ -74,7 +82,7 @@ class Book extends Component {
   }
 
   proceedBooking = () => {
-    if(this.state.chosenSeating !== ""){
+    if (this.state.chosenSeating !== "") {
       this.setState({ error: "", gdpr: true });
     } else {
       this.setState({error: "Please choose a seating time"})
@@ -90,24 +98,27 @@ class Book extends Component {
     })
   }
 
-  /* validateEmail = (email) => {
-    if (/^\w+([-]?\w+)*@\w+([-]?\w+)*(\w{2,3})+$/.test(email)){
-      return true
-    }
-    return false
-  } */
+  validateEmail = (email) => {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
+  validateForm = () => {
+    if (this.state.name !== "" && this.state.email !== "" && this.state.phone !== "") {
+      return true;
+    } return false;
+  }
 
   validateBooking = () => {
-    console.log(this.state.email)
-   /*  if(this.validateEmail(this.state.email)){ */
-      if(this.state.name !== "" && this.state.email !== "" && this.state.phone !== ""){
+    if (this.validateForm()) { 
+      if (this.validateEmail(this.state.email)) {
         this.book();
       } else {
-        this.setState({error: "Please enter the required fields"})
+        this.setState({error: "Please enter a valid email adress"});
       }
-   /*  } else {
-      this.setState({error: "Please enter a valid email adress"});
-    } */
+    } else {
+      this.setState({error: "Please enter the required fields"});
+    } 
   };
 
   book = () => {
