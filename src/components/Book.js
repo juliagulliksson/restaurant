@@ -45,11 +45,11 @@ class Book extends Component {
     this.setState({ changeDate: true, chooseSeating: false });
   };
 
-  searchForVacantSeatings = () => {
-    let formValues = JSON.stringify(this.state.date);
+  fetchGetRequest = (fileName, object, thenFunction) => {
+    let formValues = JSON.stringify(object);
     fetch(
-      "http://localhost/restaurant/src/components/php/search.php?formData=" +
-      formValues,
+      `http://localhost/restaurant/src/components/php/${fileName}.php?formData=
+      ${formValues}`,
       {
         method: "GET",
         headers: {
@@ -60,9 +60,13 @@ class Book extends Component {
     )
       .then(response => response.json())
       .then(response => {
-        this.setSeating(response);
+        thenFunction(response);
       });
-  };
+  }
+
+  searchForVacantSeatings = () => {
+    this.fetchGetRequest("search", this.state.date, this.setSeating);
+  }
 
   setSeating = response => {
     this.setState({
@@ -123,25 +127,16 @@ class Book extends Component {
   };
 
   book = () => {
-    let formValues = JSON.stringify(this.state);
-    fetch(
-      "http://localhost/restaurant/src/components/php/post.php?formData=" +
-      formValues,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "text/plain"
-        }
-      }
-    ).then(() => {
-      this.setState({
-        error: "",
-        bookingComplete: true,
-        booking: false,
-        chooseSeating: false,
-        changeDate: false
-      });
+    this.fetchGetRequest("post", this.state, this.setBookingCompleteStates);
+  };
+
+  setBookingCompleteStates = () => {
+    this.setState({
+      error: "",
+      bookingComplete: true,
+      booking: false,
+      chooseSeating: false,
+      changeDate: false
     });
   };
 

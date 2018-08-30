@@ -38,3 +38,6 @@ $statement->execute(array(
   ":seatingOne" => $seatings[0],
   ":seatingTwo" => $seatings[1]
 ));
+
+
+echo json_encode($formData, JSON_PRETTY_PRINT);
