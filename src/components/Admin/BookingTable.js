@@ -1,5 +1,6 @@
 import React from "react";
 import BookingRow from "./BookingRow";
+import BookingRowMobile from "./BookingRowMobile";
 
 class BookingTable extends React.Component {
   render() {
@@ -11,27 +12,34 @@ class BookingTable extends React.Component {
       .filter(booking => {
         return (
           booking.name.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.phone.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.email.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.bookingId.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1
+          -1
         );
       })
       .map(booking => (
-        <BookingRow
-          key={booking.bookingId}
-          booking={booking}
-          deleteBooking={this.props.deleteBooking}
-        />
-      ));
+        <React.Fragment>
+          <BookingRow
+            key={booking.bookingId}
+            booking={booking}
+            deleteBooking={this.props.deleteBooking}
+          />
+          <BookingRowMobile
 
+            key={booking.bookingId}
+            booking={booking}
+            deleteBooking={this.props.deleteBooking}
+          />
+        </React.Fragment>
+      ));
     return (
       <div>
         <table>
-          <tbody>
+          <tbody className="desktop">
             <tr>
               <th>Booking ID</th>
               <th>Date</th>
