@@ -26,7 +26,6 @@ class BookingRow extends React.Component {
   };
 
   hideEditModal = () => {
-    this.forceUpdate();
     this.setState({ showEdit: false });
   };
 
@@ -71,6 +70,7 @@ class BookingRow extends React.Component {
             handleClose={this.hideEditModal}
             handleConfirm={this.handleEdit}
           >
+            {/*Props Children for EditBookingModal, pulling in edit form*/}
             <p>Booking ID: {booking.bookingId}</p>
             <EditBookingForm
               booking={booking}
