@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteBookingModal from "./DeleteBookingModal";
 import EditBookingModal from "./EditBookingModal";
-import EditBookingForm from "../uiElements/EditBookingForm";
+import EditBookingForm from "../../uiElements/EditBookingForm";
 
 class BookingRow extends React.Component {
   state = {
@@ -51,7 +51,7 @@ class BookingRow extends React.Component {
     console.log("EditFunction");
   };
 
-  handleFormChange = () => {};
+  handleFormChange = () => { };
 
   render() {
     const booking = this.props.booking;

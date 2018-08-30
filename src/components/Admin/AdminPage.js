@@ -41,7 +41,7 @@ class AdminPage extends React.Component {
 
     fetch(
       "http://localhost/restaurant/src/components/php/sendConfirmationEmail.php?data=" +
-        bookingInfo,
+      bookingInfo,
       {
         method: "GET",
         headers: {
@@ -79,7 +79,7 @@ class AdminPage extends React.Component {
 
     fetch(
       "http://localhost/restaurant/src/components/php/deletebooking.php?data=" +
-        bookingData,
+      bookingData,
       {
         method: "DELETE",
         headers: {

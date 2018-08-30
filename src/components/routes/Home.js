@@ -1,10 +1,12 @@
-import React from "react";
-import Home from "../HomePage";
+import React, {Component} from "react";
+import HomePage from '../HomePage';
 
-export default function HomePage() {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+export default class Home extends Component{
+  render(){
+    return (
+      <div>
+        <HomePage history={this.props.history}/>
+      </div>
+    );
+  }
 }
