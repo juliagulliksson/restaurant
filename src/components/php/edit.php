@@ -19,7 +19,7 @@ $statement = $pdo->prepare(
     userPhone = :phone,
     date = :date, 
     seatingOne = :seatingOne,
-    seatingTwo = :seatingTwo,
+    seatingTwo = :seatingTwo
     WHERE bookingId = :bookingId");
 $statement->execute(array(
     
