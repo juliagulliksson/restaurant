@@ -39,8 +39,15 @@ export default class EditBookingForm extends Component {
   };
 
   handleSave = () => {
-    console.log(this.state);
-    let formValues = JSON.stringify(this.state);
+    let formValues = JSON.stringify({
+      "phone" : this.state.phone,
+      "date" : this.state.date,
+      "email" : this.state.email,
+      "name" : this.state.name,
+      "bookingId": this.state.bookingId,
+      "chosenSeating" : this.state.chosenSeating,
+      "originalPhoneNumber" : this.props.booking.phone
+    });
     fetch(
       `http://localhost/restaurant/src/components/php/edit.php?formData=
       ${formValues}`,
@@ -54,7 +61,7 @@ export default class EditBookingForm extends Component {
     )
       .then(response => response.json())
       .then(response => {
-        console.log(response);
+        //console.log(response);
         //Close the edit popup
         this.props.handleClose();
       });
