@@ -30,17 +30,17 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleDateChange = (date) => {
+  handleDateChange = date => {
     let today = moment();
     let selecedDate = moment(date);
     if (selecedDate <= today) {
-      this.setState({ error: "This date is in the past. Try again!" })
+      this.setState({ error: "This date is in the past. Try again!" });
     } else {
-      date = date.format('YYYY-MM-DD');
-      localStorage.setItem( 'date', date); 
+      date = date.format("YYYY-MM-DD");
+      localStorage.setItem("date", date);
       this.setState({ date: date, error: "" });
     }
-  }; 
+  };
 
   changeDate = () => {
     this.setState({ changeDate: true, chooseSeating: false });
@@ -55,7 +55,7 @@ class Book extends Component {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain"
         }
       }
     )
@@ -63,11 +63,11 @@ class Book extends Component {
       .then(response => {
         thenFunction(response);
       });
-  }
+  };
 
   searchForVacantSeatings = () => {
     this.fetchGetRequest("search", this.state.date, this.setSeating);
-  }
+  };
 
   setSeating = response => {
     this.setState({
@@ -103,28 +103,33 @@ class Book extends Component {
     });
   };
 
-  validateEmail = (email) => {
+  validateEmail = email => {
     let re = /\S+@\S+\.\S+/;
     return re.test(email);
-  }
+  };
 
   validateForm = () => {
-    if (this.state.name !== "" && this.state.email !== "" 
-    && this.state.phone !== "" && !isNaN(this.state.phone)) {
+    if (
+      this.state.name !== "" &&
+      this.state.email !== "" &&
+      this.state.phone !== "" &&
+      !isNaN(this.state.phone)
+    ) {
       return true;
-    } return false;
-  }
+    }
+    return false;
+  };
 
   validateBooking = () => {
-    if (this.validateForm()) { 
+    if (this.validateForm()) {
       if (this.validateEmail(this.state.email)) {
         this.book();
       } else {
-        this.setState({error: "Please enter a valid email adress"});
+        this.setState({ error: "Please enter a valid email adress" });
       }
     } else {
-      this.setState({error: "Please enter the required fields"});
-    } 
+      this.setState({ error: "Please enter the required fields" });
+    }
   };
 
   book = () => {

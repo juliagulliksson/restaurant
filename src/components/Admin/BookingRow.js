@@ -1,7 +1,6 @@
 import React from "react";
 import DeleteBookingModal from "./DeleteBookingModal";
 import EditBookingModal from "./EditBookingModal";
-import EditBookingForm from "../../uiElements/EditBookingForm";
 
 class BookingRow extends React.Component {
   state = {
@@ -26,7 +25,6 @@ class BookingRow extends React.Component {
   };
 
   hideEditModal = () => {
-    this.forceUpdate();
     this.setState({ showEdit: false });
   };
 
@@ -52,7 +50,7 @@ class BookingRow extends React.Component {
     console.log("EditFunction");
   };
 
-  handleFormChange = () => { };
+  handleFormChange = () => {};
 
   render() {
     const booking = this.props.booking;
@@ -70,13 +68,9 @@ class BookingRow extends React.Component {
             show={this.state.showEdit}
             handleClose={this.hideEditModal}
             handleConfirm={this.handleEdit}
-          >
-            <p>Booking ID: {booking.bookingId}</p>
-            <EditBookingForm
-              booking={booking}
-              onDateChange={this.onDateChange}
-            />
-          </EditBookingModal>
+            booking={booking}
+          />
+
           <button onClick={this.showEditModal} className="btn btn-secondary">
             Edit
           </button>

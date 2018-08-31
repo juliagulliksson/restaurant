@@ -25,11 +25,11 @@ export default function searchForm({ handleClick, dateValue, handleChange, class
         <div className="form-group">
           <label htmlFor="date" className="sr-only">Choose a date:</label>
 
-          <Date handleChange={handleChange} value={dateValue}/>
+          <Date handleChange={handleChange} value={dateValue} />
           <Button handleClick={handleClick}> Search for vacant tables </Button>
         </div>
       </form>
     </div>
-    
+
   );
 }
