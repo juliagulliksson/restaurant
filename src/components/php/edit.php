@@ -9,54 +9,74 @@ header("Access-Control-Allow-Headers: Content-Type, Accept");
 
 $editData = JSON_decode($_GET['formData']);
 
-//Returns an array. If 18:00/"firstSeating", the output is 1, 0.
-// If 21:00/"secondSeating", the output is 0, 1
+//Get the user id and match it to the booking row
+$statement = $pdo->prepare(
+  "SELECT id FROM users
+  JOIN booking
+  ON booking.userPhone = users.phone
+  WHERE bookingId = $editData->bookingId");
+$statement->execute();
+$userId = $statement->fetch(PDO::FETCH_ASSOC);
+$userId = $userId['id'];
+
+/*If the new phonenumber and original phonenumber doesn't match, 
+**it has to be updated in all corresponding rows*/
+if($editData->phone != $editData->originalPhoneNumber){
+  //Get all previous bookings from the user
+  $statement = $pdo->prepare(
+    "SELECT * FROM booking
+    WHERE userPhone = $editData->originalPhoneNumber");
+  $statement->execute();
+  $booking = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+  //Update all previous bookings to the new user phone
+  for($i = 0; $i < count($booking); $i++){
+    $bookingPhone = $booking[$i]['userPhone'];
+
+    //Update booking table
+    $statement = $pdo->prepare(
+      "UPDATE booking SET 
+      userPhone = :phone
+      WHERE userPhone = $bookingPhone ");
+    $statement->execute(array(
+      ":phone" => $editData->phone, 
+    )); 
+  } 
+}
+
+/* Returns an array. If 18:00/"firstSeating", the output is 1, 0.
+** If 21:00/"secondSeating", the output is 0, 1 */
 $seatings = determine_seatings($editData->chosenSeating);
 
 //Update booking table
 $statement = $pdo->prepare(
     "UPDATE booking SET 
-    userPhone = :phone,
+    userPhone = :phone, 
     date = :date, 
     seatingOne = :seatingOne,
     seatingTwo = :seatingTwo
     WHERE bookingId = :bookingId");
 $statement->execute(array(
-    
-    ":phone" => $editData->phone,
+    ":phone" => $editData->phone, 
     ":date" => $editData->date, 
     ":seatingOne" => $seatings[0],
     ":seatingTwo" => $seatings[1],
     ":bookingId" => $editData->bookingId
 )); 
 
-//Get the user id and match it to the booking row
-$statement = $pdo->prepare(
-    "SELECT * FROM booking
-    JOIN users 
-    ON booking.userPhone = users.phone
-    WHERE bookingId = $editData->bookingId");
-$statement->execute();
-$booking = $statement->fetch(PDO::FETCH_ASSOC);
-
 //Update user table
 $statement = $pdo->prepare(
     "UPDATE users SET 
-    phone = :phone,
+   phone = :phone,
     email = :email,
     name = :name
-
     WHERE id = :id");
 $statement->execute(array(
-    
-    ":phone" => $editData->phone,
+    ":phone" => $editData->phone, 
     ":email" => $editData->email,
     ":name" => $editData->name,
-    ":id" => $booking['id']
+    ":id" => $userId
 )); 
 
-
-
-
-echo json_encode($editData, JSON_PRETTY_PRINT);
+//echo json_encode($userId, JSON_PRETTY_PRINT);
 ?>

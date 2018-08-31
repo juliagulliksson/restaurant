@@ -5,6 +5,7 @@ import UserForm from "../uiElements/UserForm";
 import SearchForm from "../uiElements/SearchForm";
 import moment from "moment";
 import Button from "../uiElements/Button";
+import SuccessMessage from "../uiElements/SuccessMessage";
 
 class Book extends Component {
   state = {
@@ -146,21 +147,12 @@ class Book extends Component {
   };
 
   render() {
-    let seating;
-    this.state.chosenSeating === "firstSeating"
-      ? (seating = "18:00")
-      : (seating = "21:00");
 
     return (
       <div>
         <React.Fragment>
           {this.state.bookingComplete && (
-            <div className="success">
-              <p>
-                Congratulations! You have booked a table at {this.state.date}{" "}
-                {seating}
-              </p>
-            </div>
+            <SuccessMessage date={this.state.date} seating={this.state.seating} />
           )}
           {!this.state.changeDate &&
             !this.state.bookingComplete && (

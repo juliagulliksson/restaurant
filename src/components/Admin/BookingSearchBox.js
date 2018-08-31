@@ -13,12 +13,15 @@ class BookingSearchBox extends React.Component {
   render() {
     return (
       <form>
-        <input
-          type="text"
-          placeholder="Search bookings..."
-          value={this.props.searchInput}
-          onChange={this.handleSearchInputChange}
-        />
+       <div className="form-group admin-search">
+          <input
+            type="text"
+            placeholder="Search bookings..."
+            value={this.props.searchInput}
+            onChange={this.handleSearchInputChange}
+            className="form-control"
+          />
+        </div>
       </form>
     );
   }

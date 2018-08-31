@@ -29,9 +29,13 @@ export default class Home extends Component {
         this.props.history.push('/bookatable');
     }
 
+    componentDidMount = () => {
+      let date = moment().format("YYYY-MM-DD");
+      localStorage.setItem('date', date);
+    }
+
     render() {
-        let date = moment().format("YYYY-MM-DD");
-        localStorage.setItem('date', date);
+        
         return (
 
             <div>
