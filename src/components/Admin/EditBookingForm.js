@@ -25,6 +25,7 @@ export default class EditBookingForm extends Component {
   };
 
   handleCancel = () => {
+    //Reset to the original states
     this.setState({
       name: this.props.booking.name,
       phone: this.props.booking.phone,
@@ -33,7 +34,7 @@ export default class EditBookingForm extends Component {
       seatingOne: this.props.booking.seatingOne,
       seatingTwo: this.props.booking.seatingTwo
     });
-
+    //Close the edit popup
     this.props.handleClose();
   };
 
@@ -54,6 +55,8 @@ export default class EditBookingForm extends Component {
       .then(response => response.json())
       .then(response => {
         console.log(response);
+        //Close the edit popup
+        this.props.handleClose();
       });
   };
 
