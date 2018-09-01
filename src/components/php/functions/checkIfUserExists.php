@@ -1,6 +1,6 @@
 <?php
 
-function check_if_user_exists($value){
+function checkIfUserExists($value){
   require 'database.php';
   $statement = $pdo->prepare("SELECT COUNT(email) FROM users
   WHERE email = '$value'"); 
