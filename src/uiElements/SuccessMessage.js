@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 export default function SuccessMessage({date, seating}){
   let seatingTime;
@@ -7,7 +8,7 @@ export default function SuccessMessage({date, seating}){
     : (seatingTime = "21:00");
   return(
     <div className="alert alert-success" role="alert">
-      Congratulations! You have booked a table at {date}{" "}{seatingTime}
+      Congratulations! You have booked a table at {moment(date).format('MMMM Do YYYY')}{", "}{seatingTime}
     </div>
   );
 }
