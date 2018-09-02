@@ -25,6 +25,7 @@ class BookingTable extends React.Component {
           key={booking.bookingId}
           booking={booking}
           deleteBooking={this.props.deleteBooking}
+          handleChange={this.props.handleChange}
         />
       ));
 

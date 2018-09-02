@@ -6,6 +6,7 @@ import SearchForm from "../uiElements/SearchForm";
 import moment from "moment";
 import Button from "../uiElements/Button";
 import SuccessMessage from "../uiElements/SuccessMessage";
+import ErrorMessage from "../uiElements/ErrorMessage";
 
 class Book extends Component {
   state = {
@@ -75,7 +76,8 @@ class Book extends Component {
         seatingOne: response.seatingOne,
         seatingTwo: response.seatingTwo
       },
-      chooseSeating: true
+      chooseSeating: true,
+      error: ""
     });
   };
 
@@ -99,7 +101,9 @@ class Book extends Component {
       booking: false,
       chooseSeating: false,
       error: "",
-      gdpr: false
+      gdpr: false,
+      changeDate: true,
+      chosenSeating: ""
     });
   };
 
@@ -178,9 +182,9 @@ class Book extends Component {
               />
             )}
 
-            <div className="error">
-              <p>{this.state.error}</p>
-            </div>
+            {this.state.error !== "" &&
+            <ErrorMessage>{this.state.error}</ErrorMessage>
+            }
 
             {this.state.gdpr && (
               <Gdpr

@@ -8,7 +8,7 @@ export default function SuccessMessage({date, seating}){
     : (seatingTime = "21:00");
   return(
     <div className="alert alert-success" role="alert">
-      Congratulations! You have booked a table at {moment(date).format('MMMM Do YYYY')}{", "}{seatingTime}
+      Congratulations! You have booked a table on {moment(date).format('MMMM Do YYYY')}{", "}{seatingTime}
     </div>
   );
 }

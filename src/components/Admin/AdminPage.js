@@ -18,17 +18,30 @@ class AdminPage extends React.Component {
     bookings: [],
     searchInput: "",
     bookingId: "",
-    date: "",
-    name: "",
+    //date: "",
+    //name: "",
     phone: "",
-    seatingOne: "",
-    seatingTwo: "",
-    email: ""
+    //seatingOne: "",
+    //seatingTwo: "",
+    //email: ""
   };
 
   componentDidMount() {
     this.getBookingsFromApi();
   }
+
+     handleDateChange = date => {
+    date = date.format("YYYY-MM-DD");
+    this.setState({ date: date });
+  };
+
+  handleChange = event => {
+    //Update all input field states based on their HTML names
+   /*  this.setState({bookings:[...this.state.bookings, event.target.value]});
+    //this.setState({ bookings:[[0][event.target.name]: event.target.value] });
+    console.log(event) */
+    this.getBookingsFromApi();
+  };   
 
   handleSearchInputChange = searchInput => {
     this.setState({
@@ -117,6 +130,9 @@ class AdminPage extends React.Component {
           bookings={this.state.bookings}
           searchInput={this.state.searchInput}
           deleteBooking={this.deleteBooking}
+          update={this.update}
+          handleChange={this.handleChange}
+          handleDateChange={this.handleDateChange}
         />
       </div>
     );

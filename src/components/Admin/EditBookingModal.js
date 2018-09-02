@@ -30,6 +30,8 @@ class EditBookingModal extends React.Component {
               <EditBookingForm
                 booking={this.props.booking}
                 handleClose={this.props.handleClose}
+                handleChange={this.props.handleChange}
+                handleDateChange={this.props.handleDateChange}
               />
             </div>
           </div>

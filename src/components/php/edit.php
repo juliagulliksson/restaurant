@@ -78,5 +78,5 @@ $statement->execute(array(
     ":id" => $userId
 )); 
 
-//echo json_encode($userId, JSON_PRETTY_PRINT);
+echo json_encode($userId, JSON_PRETTY_PRINT);
 ?>
