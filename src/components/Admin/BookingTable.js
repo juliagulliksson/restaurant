@@ -28,22 +28,28 @@ class BookingTable extends React.Component {
           handleChange={this.props.handleChange}
         />
       ));
-    return (
-      <div>
-        <div className="table-header-desktop">
-          <ul>
-            <li>Booking ID</li>
-            <li>Date</li>
-            <li>Time</li>
-            <li>Name</li>
-            <li>Phone</li>
-            <li>Email</li>
-          </ul>
-        </div>
+    console.log(rows.length);
+    if (rows.length > 0) {
+      return (
+        <div>
+          <div className="table-header-desktop">
+            <ul>
+              <li>Booking ID</li>
+              <li>Date</li>
+              <li>Time</li>
+              <li>Name</li>
+              <li>Phone</li>
+              <li>Email</li>
+            </ul>
+          </div>
 
-        <div className="table-content-wrapp">{rows}</div>
-      </div>
-    );
+          <div className="table-content-wrapp">{rows}</div>
+        </div>
+      );
+    } else {
+      //error message
+      return <div>No bookings found </div>;
+    }
   }
 }
 export default BookingTable;
