@@ -64,7 +64,35 @@ class Book extends Component {
       .then(response => {
         thenFunction(response);
       });
+    this.mail();
   };
+
+  mail = () => {
+
+    let mailValues = JSON.stringify({
+      "name": this.state.name,
+      "email": this.state.email,
+      "phone": this.state.phone,
+      "date": this.state.date
+    }
+    )
+
+    fetch(
+      "http://localhost/restaurant/src/components/php/mail.php?mailData=" +
+      mailValues,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "text/plain"
+        }
+      }
+    )
+      .then(response => response.text())
+      .then(response => {
+        console.log(response);
+      })
+  }
 
   searchForVacantSeatings = () => {
     this.fetchGetRequest("search", this.state.date, this.setSeating);
@@ -183,7 +211,7 @@ class Book extends Component {
             )}
 
             {this.state.error !== "" &&
-            <ErrorMessage>{this.state.error}</ErrorMessage>
+              <ErrorMessage>{this.state.error}</ErrorMessage>
             }
 
             {this.state.gdpr && (
