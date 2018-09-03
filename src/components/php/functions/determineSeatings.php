@@ -1,6 +1,6 @@
 <?php
 
-function determine_seatings($value){
+function determineSeatings($value){
   if($value == "firstSeating"){
     $seatingOne = 1;
     $seatingTwo = 0;

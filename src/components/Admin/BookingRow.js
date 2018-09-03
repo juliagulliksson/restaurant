@@ -69,6 +69,8 @@ class BookingRow extends React.Component {
             handleClose={this.hideEditModal}
             handleConfirm={this.handleEdit}
             booking={booking}
+            handleChange={this.props.handleChange}
+            handleDateChange={this.props.handleDateChange}
           />
 
           <button onClick={this.showEditModal} className="btn btn-secondary">

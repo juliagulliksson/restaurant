@@ -173,8 +173,13 @@ ul {
   margin: 30px;
 }
 
+.home h1{
+  margin: 20px;
+}
+
 .home p {
   text-align: justify;
+  padding: 0px 30px;
 }
 
 /* Contact */
@@ -259,15 +264,6 @@ footer ul {
 
 footer ul li {
   list-style: none;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* Modal */

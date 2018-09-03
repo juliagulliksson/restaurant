@@ -1,6 +1,6 @@
 <?php
 require "database.php";
-require "functions/determine_seatings.php";
+require "functions/determineSeatings.php";
 
 header("Access-Control-Allow-Methods: GET, POST, DELETE"); 
 header("Access-Control-Allow-Origin: http://localhost:3000");
@@ -46,7 +46,7 @@ if($editData->phone != $editData->originalPhoneNumber){
 
 /* Returns an array. If 18:00/"firstSeating", the output is 1, 0.
 ** If 21:00/"secondSeating", the output is 0, 1 */
-$seatings = determine_seatings($editData->chosenSeating);
+$seatings = determineSeatings($editData->chosenSeating);
 
 //Update booking table
 $statement = $pdo->prepare(
@@ -78,5 +78,5 @@ $statement->execute(array(
     ":id" => $userId
 )); 
 
-//echo json_encode($userId, JSON_PRETTY_PRINT);
+echo json_encode($userId, JSON_PRETTY_PRINT);
 ?>

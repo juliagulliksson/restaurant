@@ -59,11 +59,11 @@ export default class EditBookingForm extends Component {
         }
       }
     )
-      .then(response => response.json())
-      .then(response => {
+      .then(() => {
         //console.log(response);
         //Close the edit popup
         this.props.handleClose();
+        this.props.handleChange();
       });
   };
 

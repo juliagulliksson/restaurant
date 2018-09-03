@@ -1,7 +1,7 @@
 <?php
 require "database.php";
-require "functions/check_if_user_exists.php";
-require "functions/determine_seatings.php";
+require "functions/checkIfUserExists.php";
+require "functions/determineSeatings.php";
 
 header("Access-Control-Allow-Methods: GET, POST"); 
 header("Access-Control-Allow-Origin: http://localhost:3000"); 
@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, accept");
 //Receive the GET-parameters from Book.js
 $formData = json_decode($_GET["formData"], false);
 
-if(!check_if_user_exists($formData->email)){
+if(!checkIfUserExists($formData->email)){
   //User doesn't exist, insert user into database
   $statement = $pdo->prepare(
     "INSERT INTO users (name, email, phone) 
@@ -25,7 +25,7 @@ if(!check_if_user_exists($formData->email)){
 
 //Returns an array. If 18:00/"firstSeating", the output is 1, 0.
 // If 21:00/"secondSeating", the output is 0, 1
-$seatings = determine_seatings($formData->chosenSeating);
+$seatings = determineSeatings($formData->chosenSeating);
 
 //Insert booking into database
 $statement = $pdo->prepare(
