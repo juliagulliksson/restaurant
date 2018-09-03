@@ -13,7 +13,8 @@ export default function SeatingForm(props) {
           <form>
 
           <div className="form-group">
-            <h2>Available seating times:</h2>
+          {!props.admin &&   <h2>Available seating times:</h2>}
+          
             {props.seatingTimes.seatingOne < 15 && (
               <div className="form-check form-check-inline">
                 <label className="form-check-label">

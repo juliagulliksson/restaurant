@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteBookingModal from "./DeleteBookingModal";
 import EditBookingModal from "./EditBookingModal";
-import EditBookingForm from "./EditBookingForm";
+import EditBookingForm from "./EditBooking";
 
 class BookingRowMobile extends React.Component {
     state = {

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Date from "../../uiElements/DatePicker";
 import moment from "moment";
-import SeatingForm from './../../uiElements/SeatingForm';
+import SeatingForm from '../../uiElements/SeatingForm';
+import EditBookingForm from '../../uiElements/EditBookingForm';
 
-export default class EditBookingForm extends Component {
+export default class EditBooking extends Component {
   state = {
     name: this.props.booking.name,
     phone: this.props.booking.phone,
@@ -95,38 +96,13 @@ export default class EditBookingForm extends Component {
           /> 
           <br />
 
-          <label className="editField" htmlFor="name">
-            Name
-          </label>
-          <input
-            className="editField"
-            type="text"
-            name="name"
-            defaultValue={this.state.name}
-            onChange={this.handleChange}
-          />
-          <br />
-          <label className="editField" htmlFor="phone">
-            Phone
-          </label>
-          <input
-            className="editField"
-            type="text"
-            name="phone"
-            defaultValue={this.state.phone}
-            onChange={this.handleChange}
-          />
-          <br />
-          <label className="editField" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="editField"
-            type="text"
-            name="email"
-            defaultValue={this.state.email}
-            onChange={this.handleChange}
-          />
+          <EditBookingForm  
+                defaultName={this.state.name}
+                defaultPhone={this.state.phone}
+                defaultEmail={this.state.email}
+                handleChange={this.handleChange} />
+
+
         </form>
         <div className="modal-footer">
           <button
