@@ -22,19 +22,12 @@ class BookingTable extends React.Component {
         );
       })
       .map(booking => (
-        <React.Fragment>
-          <BookingRow
-            key={booking.bookingId}
-            booking={booking}
-            deleteBooking={this.props.deleteBooking}
-          />
-          <BookingRowMobile
-
-            key={booking.bookingId}
-            booking={booking}
-            deleteBooking={this.props.deleteBooking}
-          />
-        </React.Fragment>
+        <BookingRow
+          key={booking.bookingId}
+          booking={booking}
+          deleteBooking={this.props.deleteBooking}
+          handleChange={this.props.handleChange}
+        />
       ));
     return (
       <div>

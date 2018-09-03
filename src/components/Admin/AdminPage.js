@@ -18,17 +18,16 @@ class AdminPage extends React.Component {
     bookings: [],
     searchInput: "",
     bookingId: "",
-    date: "",
-    name: "",
     phone: "",
-    seatingOne: "",
-    seatingTwo: "",
-    email: ""
   };
 
   componentDidMount() {
     this.getBookingsFromApi();
   }
+
+  handleChange = () => {
+    this.getBookingsFromApi();
+  };
 
   handleSearchInputChange = searchInput => {
     this.setState({
@@ -117,6 +116,9 @@ class AdminPage extends React.Component {
           bookings={this.state.bookings}
           searchInput={this.state.searchInput}
           deleteBooking={this.deleteBooking}
+          update={this.update}
+          handleChange={this.handleChange}
+          handleDateChange={this.handleDateChange}
         />
       </div>
     );

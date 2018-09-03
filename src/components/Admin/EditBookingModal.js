@@ -1,10 +1,7 @@
 import React from "react";
+import EditBookingForm from "./EditBookingForm";
 
 class EditBookingModal extends React.Component {
-  //   constructor(props) {
-  //     super(props);
-  //   }
-
   render() {
     return (
       <div
@@ -28,23 +25,14 @@ class EditBookingModal extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body">{this.props.children}</div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={this.props.handleConfirm}
-              >
-                Save
-              </button>
-              <button
-                onClick={this.props.handleClose}
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
+            <div className="modal-body">
+              <p>Booking ID: {this.props.booking.bookingId}</p>
+              <EditBookingForm
+                booking={this.props.booking}
+                handleClose={this.props.handleClose}
+                handleChange={this.props.handleChange}
+                handleDateChange={this.props.handleDateChange}
+              />
             </div>
           </div>
         </div>

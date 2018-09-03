@@ -2,6 +2,15 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.book h1{
+  margin-top: 0.5em;
+}
+
+.admin-search{
+  width: 30%;
+  margin: 0 auto;
+}
+
 .header-image {
   height: 400px;
   background-size: cover;
@@ -164,8 +173,13 @@ ul {
   margin: 30px;
 }
 
+.home h1{
+  margin: 20px;
+}
+
 .home p {
   text-align: justify;
+  padding: 0px 30px;
 }
 
 /* Contact */
@@ -250,15 +264,6 @@ footer ul {
 
 footer ul li {
   list-style: none;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* Modal */

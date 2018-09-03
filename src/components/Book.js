@@ -5,6 +5,8 @@ import UserForm from "../uiElements/UserForm";
 import SearchForm from "../uiElements/SearchForm";
 import moment from "moment";
 import Button from "../uiElements/Button";
+import SuccessMessage from "../uiElements/SuccessMessage";
+import ErrorMessage from "../uiElements/ErrorMessage";
 
 class Book extends Component {
   state = {
@@ -29,17 +31,17 @@ class Book extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleDateChange = (date) => {
+  handleDateChange = date => {
     let today = moment();
     let selecedDate = moment(date);
     if (selecedDate <= today) {
-      this.setState({ error: "This date is in the past. Try again!" })
+      this.setState({ error: "This date is in the past. Try again!" });
     } else {
-      date = date.format('YYYY-MM-DD');
-      localStorage.setItem( 'date', date); 
+      date = date.format("YYYY-MM-DD");
+      localStorage.setItem("date", date);
       this.setState({ date: date, error: "" });
     }
-  }; 
+  };
 
   changeDate = () => {
     this.setState({ changeDate: true, chooseSeating: false });
@@ -54,7 +56,7 @@ class Book extends Component {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain"
         }
       }
     )
@@ -62,11 +64,11 @@ class Book extends Component {
       .then(response => {
         thenFunction(response);
       });
-  }
+  };
 
   searchForVacantSeatings = () => {
     this.fetchGetRequest("search", this.state.date, this.setSeating);
-  }
+  };
 
   setSeating = response => {
     this.setState({
@@ -74,7 +76,8 @@ class Book extends Component {
         seatingOne: response.seatingOne,
         seatingTwo: response.seatingTwo
       },
-      chooseSeating: true
+      chooseSeating: true,
+      error: ""
     });
   };
 
@@ -98,32 +101,39 @@ class Book extends Component {
       booking: false,
       chooseSeating: false,
       error: "",
-      gdpr: false
+      gdpr: false,
+      changeDate: true,
+      chosenSeating: ""
     });
   };
 
-  validateEmail = (email) => {
+  validateEmail = email => {
     let re = /\S+@\S+\.\S+/;
     return re.test(email);
-  }
+  };
 
   validateForm = () => {
-    if (this.state.name !== "" && this.state.email !== "" 
-    && this.state.phone !== "" && !isNaN(this.state.phone)) {
+    if (
+      this.state.name !== "" &&
+      this.state.email !== "" &&
+      this.state.phone !== "" &&
+      !isNaN(this.state.phone)
+    ) {
       return true;
-    } return false;
-  }
+    }
+    return false;
+  };
 
   validateBooking = () => {
-    if (this.validateForm()) { 
+    if (this.validateForm()) {
       if (this.validateEmail(this.state.email)) {
         this.book();
       } else {
-        this.setState({error: "Please enter a valid email adress"});
+        this.setState({ error: "Please enter a valid email adress" });
       }
     } else {
-      this.setState({error: "Please enter the required fields"});
-    } 
+      this.setState({ error: "Please enter the required fields" });
+    }
   };
 
   book = () => {
@@ -141,21 +151,12 @@ class Book extends Component {
   };
 
   render() {
-    let seating;
-    this.state.chosenSeating === "firstSeating"
-      ? (seating = "18:00")
-      : (seating = "21:00");
 
     return (
       <div>
         <React.Fragment>
           {this.state.bookingComplete && (
-            <div className="success">
-              <p>
-                Congratulations! You have booked a table at {this.state.date}{" "}
-                {seating}
-              </p>
-            </div>
+            <SuccessMessage date={this.state.date} seating={this.state.seating} />
           )}
           {!this.state.changeDate &&
             !this.state.bookingComplete && (
@@ -181,9 +182,9 @@ class Book extends Component {
               />
             )}
 
-            <div className="error">
-              <p>{this.state.error}</p>
-            </div>
+            {this.state.error !== "" &&
+            <ErrorMessage>{this.state.error}</ErrorMessage>
+            }
 
             {this.state.gdpr && (
               <Gdpr
