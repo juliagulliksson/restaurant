@@ -8,12 +8,12 @@ require 'database.php';
 $formData = json_decode($_GET["formData"], false);
 
 $statement = $pdo->prepare(
-  "SELECT * FROM booking WHERE date = $formData AND seatingOne = 0");
+  "SELECT * FROM booking WHERE date = '$formData' AND seatingOne = 1");
 $statement->execute(); 
 $seatingOneBookings = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 $statement = $pdo->prepare(
-  "SELECT * FROM booking WHERE date = $formData AND seatingTwo = 0");
+  "SELECT * FROM booking WHERE date = '$formData' AND seatingTwo = 1");
 $statement->execute(); 
 $seatingTwoBookings = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -22,4 +22,3 @@ $bookings = array(
   "seatingTwo" => count($seatingTwoBookings));
 
 echo json_encode($bookings, JSON_PRETTY_PRINT);
-
