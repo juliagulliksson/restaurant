@@ -22,12 +22,18 @@ class BookingTable extends React.Component {
         );
       })
       .map(booking => (
-        <BookingRow
-          key={booking.bookingId}
-          booking={booking}
-          deleteBooking={this.props.deleteBooking}
-          handleChange={this.props.handleChange}
+       <React.Fragment>
+         <BookingRow
+            key={booking.bookingId}
+            booking={booking}
+            deleteBooking={this.props.deleteBooking}
+       />
+        <BookingRowMobile
+            key={booking.bookingId}
+            booking={booking}
+            deleteBooking={this.props.deleteBooking}
         />
+       </React.Fragment>
       ));
     return (
       <div>
@@ -44,7 +50,8 @@ class BookingTable extends React.Component {
           </tbody>
           <tbody>{rows}</tbody>
         </table>
-      </div>
+    </div>
+   
     );
   }
 }

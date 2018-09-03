@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteBookingModal from "./DeleteBookingModal";
 import EditBookingModal from "./EditBookingModal";
-import EditBookingForm from "../../uiElements/EditBookingForm";
+import EditBookingForm from "./EditBookingForm";
 
 class BookingRowMobile extends React.Component {
     state = {
@@ -57,7 +57,7 @@ class BookingRowMobile extends React.Component {
         const booking = this.props.booking;
 
         return (
-            <div className="col-md-12 mobile">
+            <div className="mobile col-md-12">
                 <p>ID: {booking.bookingId}</p>
                 <hr />
                 <p>Date: {booking.date}</p>
@@ -70,6 +70,9 @@ class BookingRowMobile extends React.Component {
                         show={this.state.showEdit}
                         handleClose={this.hideEditModal}
                         handleConfirm={this.handleEdit}
+                        booking={booking}
+                        handleChange={this.props.handleChange}
+                        handleDateChange={this.props.handleDateChange}
                     >
                         {/*Props Children for EditBookingModal, pulling in edit form*/}
                         <p>Booking ID: {booking.bookingId}</p>
