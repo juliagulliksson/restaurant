@@ -40,7 +40,7 @@ class BookingTable extends React.Component {
             </ul>
           </div>
           
-          <div className="table-content">{rows}</div>
+          <div className="table-content-wrapp">{rows}</div>
         
     </div>
    
