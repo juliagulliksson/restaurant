@@ -58,13 +58,14 @@ class BookingRowMobile extends React.Component {
 
         return (
             <div className="mobile col-md-12">
-                <p>ID: {booking.bookingId}</p>
-                <hr />
-                <p>Date: {booking.date}</p>
-                <p>Time: {booking.seatingOne === "1" ? "18:00" : "21:00"}</p>
-                <p>Name: {booking.name}</p>
-                <p>Phone: {booking.userPhone}</p>
-                <p>Email: {booking.email}</p>
+            <ul>
+                <li>ID: {booking.bookingId}</li>
+                <li>Date: {booking.date}</li>
+                <li>Time: {booking.seatingOne === "1" ? "18:00" : "21:00"}</li>
+                <li>Name: {booking.name}</li>
+                <li>phone: {booking.userphone}</li>
+                <li>Email: {booking.email}</li>
+                </ul>
                 <p>
                     <EditBookingModal
                         show={this.state.showEdit}

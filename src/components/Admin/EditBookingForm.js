@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Date from "../../uiElements/DatePicker";
 import moment from "moment";
+import SeatingForm from './../../uiElements/SeatingForm';
 
 export default class EditBookingForm extends Component {
   state = {
@@ -11,7 +12,11 @@ export default class EditBookingForm extends Component {
     seatingOne: this.props.booking.seatingOne,
     seatingTwo: this.props.booking.seatingTwo,
     chosenSeating: "",
-    bookingId: this.props.booking.bookingId
+    bookingId: this.props.booking.bookingId,
+    seatingTimes: {
+      seatingOne: "",
+      seatingTwo: ""
+    }
   };
 
   handleDateChange = date => {
@@ -60,9 +65,9 @@ export default class EditBookingForm extends Component {
       }
     )
       .then(() => {
-        //console.log(response);
         //Close the edit popup
         this.props.handleClose();
+        //Get the edited bookings in AdminPage.js
         this.props.handleChange();
       });
   };
@@ -81,38 +86,13 @@ export default class EditBookingForm extends Component {
 
           <br />
 
-          <div className="form-check form-check-inline">
-            <label className="form-check-label">
-              <input
-                className="form-check-input"
-                type="radio"
-                value="firstSeating"
-                name="chosenSeating"
-                onChange={this.handleChange}
-                defaultChecked={
-                  this.props.booking.seatingOne === "1" ? true : false
-                }
-              />
-              18:00
-            </label>
-          </div>
-
-          <div className="form-check form-check-inline">
-            <label className="form-check-label">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="chosenSeating"
-                onChange={this.handleChange}
-                value="secondSeating"
-                defaultChecked={
-                  this.props.booking.seatingTwo === "1" ? true : false
-                }
-              />
-              21:00
-            </label>
-          </div>
-
+          <SeatingForm
+                firstSeatingDefault={this.props.booking.seatingOne === "1" ? true : false}
+                secondSeatingDefault={this.props.booking.seatingTwo === "1" ? true : false}
+                seatingTimes={this.state.seatingTimes}
+                handleChange={this.handleChange}
+                admin={true}
+          /> 
           <br />
 
           <label className="editField" htmlFor="name">
