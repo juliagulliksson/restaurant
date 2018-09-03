@@ -67,13 +67,15 @@ class Book extends Component {
     this.mail();
   };
 
+  // Sends confirmation email to the person booking.
   mail = () => {
 
     let mailValues = JSON.stringify({
       "name": this.state.name,
       "email": this.state.email,
       "phone": this.state.phone,
-      "date": this.state.date
+      "date": this.state.date,
+      // "seatingTime": this.state.seatingTimes.seatingOne
     }
     )
 
