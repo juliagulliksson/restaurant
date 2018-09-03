@@ -81,7 +81,7 @@ class BookingRowMobile extends React.Component {
                             onDateChange={this.onDateChange}
                         />
                     </EditBookingModal>
-                    <button onClick={this.showEditModal} className="btn btn-secondary">
+                    <button onClick={this.showEditModal} className="button-edit">
                         Edit
           </button>
                 </p>
@@ -100,7 +100,7 @@ class BookingRowMobile extends React.Component {
                         <p>Phone: {booking.userPhone}</p>
                         <p>Email: {booking.email}</p>
                     </DeleteBookingModal>
-                    <button onClick={this.showDeleteModal} className="btn btn-danger">
+                    <button onClick={this.showDeleteModal} className="button-delete">
                         Delete
           </button>
                 </p>
