@@ -280,20 +280,19 @@ footer ul li {
   box-sizing: border-box;
   border-bottom: 1px solid black;
 }
+/* Mobile styling */
 
-.desktop {
-  display: none;
+.table-header-desktop{
+  display:none;
 }
 
-.mobile {
-  display: block;
-}
-
+/* Desktop styling for Admin */
 @media only screen and (min-width: 768px) {
-  .mobile {
-    display: none;
+  .table-header-desktop{
+    display:block;
+   
   }
-  .desktop {
-    display: block;
+  .table-header-desktop ul{
+    list-style: none;
   }
 }

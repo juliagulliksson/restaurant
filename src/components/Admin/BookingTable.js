@@ -1,6 +1,5 @@
 import React from "react";
 import BookingRow from "./BookingRow";
-import BookingRowMobile from "./BookingRowMobile";
 
 class BookingTable extends React.Component {
   render() {
@@ -22,34 +21,27 @@ class BookingTable extends React.Component {
         );
       })
       .map(booking => (
-       <React.Fragment>
          <BookingRow
             key={booking.bookingId}
             booking={booking}
             deleteBooking={this.props.deleteBooking}
        />
-        <BookingRowMobile
-            key={booking.bookingId}
-            booking={booking}
-            deleteBooking={this.props.deleteBooking}
-        />
-       </React.Fragment>
       ));
     return (
       <div>
-        <table>
-          <tbody className="desktop">
-            <tr>
-              <th>Booking ID</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-            </tr>
-          </tbody>
-          <tbody>{rows}</tbody>
-        </table>
+          <div className="table-header-desktop">
+            <ul>
+              <li>Booking ID</li>
+              <li>Date</li>
+              <li>Time</li>
+              <li>Name</li>
+              <li>Phone</li>
+              <li>Email</li>
+            </ul>
+          </div>
+          
+          <div className="table-content-wrapp">{rows}</div>
+        
     </div>
    
     );
