@@ -71,6 +71,7 @@ class Book extends Component {
   };
 
   setSeating = response => {
+    console.log(response);
     this.setState({
       seatingTimes: {
         seatingOne: response.seatingOne,
@@ -150,13 +151,17 @@ class Book extends Component {
     });
   };
 
+  componentDidMount = () => {
+    this.searchForVacantSeatings();
+  }
+
   render() {
 
     return (
       <div>
         <React.Fragment>
           {this.state.bookingComplete && (
-            <SuccessMessage date={this.state.date} seating={this.state.seating} />
+            <SuccessMessage date={this.state.date} seating={this.state.chosenSeating} />
           )}
           {!this.state.changeDate &&
             !this.state.bookingComplete && (

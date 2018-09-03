@@ -38,19 +38,17 @@ export default class Home extends Component {
         
       return (
 
-        <div>
-            <React.Fragment>
-                <div className="header-image">
-                    {this.state.error &&
-                        <Error>This date is in the past, try again!</Error>
-                    }
-                    <SearchForm handleChange={this.handleDateChange}
-                        handleClick={this.navigate}
-                        dateValue={moment()}
-                        className={"home-search-container"} />
-                </div>
-
-            </React.Fragment>
+        <React.Fragment>
+          
+            <div className="header-image">
+                {this.state.error &&
+                    <Error>This date is in the past, try again!</Error>
+                }
+                <SearchForm handleChange={this.handleDateChange}
+                    handleClick={this.navigate}
+                    dateValue={moment()}
+                    className={"home-search-container"} />
+            </div>
             <div className="home">
                 <h1>Finne Dinner</h1>
                 
@@ -63,10 +61,10 @@ export default class Home extends Component {
                   <p>The new management at Fine Dinner has gone back to Mediterranean cuisine with an Italian emphasis,
                   for which the restaurant has always been identified. The gastronomic offering is complemented by a wine list of over
                   50 varieties from the best vineyards in the country.n this part of the city, with a certain New York Soho feel, music is essential.
-      Every Wednesday, Thursday and Sundays nights Fine Dinner offers live jazz from 21h.</p>
+                  Every Wednesday, Thursday and Sundays nights Fine Dinner offers live jazz from 21h.</p>
     
             </div>
-        </div>
+        </React.Fragment>
     );
 
   }

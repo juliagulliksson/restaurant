@@ -15,9 +15,6 @@ ON booking.userPhone = users.phone
 WHERE DATE(booking.date) >= CURDATE()
 ORDER BY booking.date, booking.seatingTwo");
 $statement->execute();
-
 $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode($bookings, JSON_PRETTY_PRINT);
-
-?>

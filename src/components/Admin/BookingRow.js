@@ -46,12 +46,6 @@ class BookingRow extends React.Component {
     this.props.deleteBooking(bookingInfo);
   };
 
-  handleEdit = () => {
-    console.log("EditFunction");
-  };
-
-  handleFormChange = () => {};
-
   render() {
     const booking = this.props.booking;
 
