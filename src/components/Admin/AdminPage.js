@@ -10,7 +10,10 @@ import BookingSearchBox from "./BookingSearchBox";
 **      └── BookingRow 
 **          ├── DeleteBookingModal
 **          └── EditBookingModal
-**              └── EditBookingForm
+**              └── EditBooking
+**                  ├── EditBookingForm
+**                  └── SeatingForm
+**
 */
 
 class AdminPage extends React.Component {
@@ -18,7 +21,7 @@ class AdminPage extends React.Component {
     bookings: [],
     searchInput: "",
     bookingId: "",
-    phone: "",
+    phone: ""
   };
 
   componentDidMount() {
@@ -40,7 +43,7 @@ class AdminPage extends React.Component {
 
     fetch(
       "http://localhost/restaurant/src/components/php/sendConfirmationEmail.php?data=" +
-      bookingInfo,
+        bookingInfo,
       {
         method: "GET",
         headers: {
@@ -78,7 +81,7 @@ class AdminPage extends React.Component {
 
     fetch(
       "http://localhost/restaurant/src/components/php/deletebooking.php?data=" +
-      bookingData,
+        bookingData,
       {
         method: "DELETE",
         headers: {
