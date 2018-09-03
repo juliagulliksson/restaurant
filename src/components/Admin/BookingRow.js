@@ -56,7 +56,7 @@ class BookingRow extends React.Component {
     const booking = this.props.booking;
 
     return (
-      <tr>
+      <tr className="desktop">
         <td>{booking.bookingId}</td>
         <td>{booking.date}</td>
         <td>{booking.seatingOne === "1" ? "18:00" : "21:00"}</td>
