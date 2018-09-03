@@ -52,40 +52,40 @@ class BookingRow extends React.Component {
     return (
       <div className="booking-content">
         <ul>
-            <li>{booking.bookingId}</li>
-            <li>{booking.date}</li>
-            <li>{booking.seatingOne === "1" ? "18:00" : "21:00"}</li>
-            <li>{booking.name}</li>
-            <li>{booking.userPhone}</li>
-            <li>{booking.email}</li>
-            <li><EditBookingModal
-                show={this.state.showEdit}
-                handleClose={this.hideEditModal}
-                handleConfirm={this.handleEdit}
-                booking={booking}
-                handleChange={this.props.handleChange}
-                handleDateChange={this.props.handleDateChange}
-              />
-                <button onClick={this.showEditModal} className="btn btn-secondary">
-                  Edit
+          <li>ID: {booking.bookingId}</li>
+          <li>Date; {booking.date}</li>
+          <li>Time : {booking.seatingOne === "1" ? "18:00" : "21:00"}</li>
+          <li>Name: {booking.name}</li>
+          <li>Phone: {booking.userPhone}</li>
+          <li>Email: {booking.email}</li>
+          <li><EditBookingModal
+            show={this.state.showEdit}
+            handleClose={this.hideEditModal}
+            handleConfirm={this.handleEdit}
+            booking={booking}
+            handleChange={this.props.handleChange}
+            handleDateChange={this.props.handleDateChange}
+          />
+            <button onClick={this.showEditModal} className="btn btn-secondary">
+              Edit
                 </button> </li>
-            <li><DeleteBookingModal
-                show={this.state.showDelete}
-                handleClose={this.hideDeleteModal}
-                handleConfirm={this.handleDelete} >
-                <p>Booking ID: {booking.bookingId}</p>
-                <p>Date: {booking.date}</p>
-                <p>
-                  Seating time: {booking.seatingOne === "1" ? "18:00" : "21:00"}
-                </p>
-                <p>Name: {booking.name}</p>
-                <p>Phone: {booking.userPhone}</p>
-                <p>Email: {booking.email}</p>
-                </DeleteBookingModal>
-                <button onClick={this.showDeleteModal} className="btn btn-danger">
-                  Delete
+          <li><DeleteBookingModal
+            show={this.state.showDelete}
+            handleClose={this.hideDeleteModal}
+            handleConfirm={this.handleDelete} >
+            <p>Booking ID: {booking.bookingId}</p>
+            <p>Date: {booking.date}</p>
+            <p>
+              Seating time: {booking.seatingOne === "1" ? "18:00" : "21:00"}
+            </p>
+            <p>Name: {booking.name}</p>
+            <p>Phone: {booking.userPhone}</p>
+            <p>Email: {booking.email}</p>
+          </DeleteBookingModal>
+            <button onClick={this.showDeleteModal} className="btn btn-danger">
+              Delete
                 </button></li>
-      </ul>
+        </ul>
       </div>
     );
   }
