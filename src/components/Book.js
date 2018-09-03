@@ -73,7 +73,8 @@ class Book extends Component {
       "name": this.state.name,
       "email": this.state.email,
       "phone": this.state.phone,
-      "date": this.state.date
+      "date": this.state.date,
+      "chosenSeating": this.state.chooseSeating
     }
     )
 
@@ -209,9 +210,11 @@ class Book extends Component {
             {this.state.chooseSeating && (
               <SeatingForm
                 seatingTimes={this.state.seatingTimes}
-                chosenSeating={this.state.chosenSeating}
                 handleChange={this.handleChange}
                 handleClick={this.proceedBooking}
+                firstSeatingDefault={null}
+                secondSeatingDefault={null}
+                admin={false}
               />
             )}
 
