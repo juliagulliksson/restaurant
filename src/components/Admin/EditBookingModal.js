@@ -1,5 +1,5 @@
 import React from "react";
-import EditBookingForm from "./EditBookingForm";
+import EditBooking from "./EditBooking";
 
 class EditBookingModal extends React.Component {
   render() {
@@ -27,7 +27,7 @@ class EditBookingModal extends React.Component {
             </div>
             <div className="modal-body">
               <p>Booking ID: {this.props.booking.bookingId}</p>
-              <EditBookingForm
+              <EditBooking
                 booking={this.props.booking}
                 handleClose={this.props.handleClose}
                 handleChange={this.props.handleChange}

@@ -64,13 +64,43 @@ class Book extends Component {
       .then(response => {
         thenFunction(response);
       });
+    this.mail();
   };
+
+  mail = () => {
+
+    let mailValues = JSON.stringify({
+      "name": this.state.name,
+      "email": this.state.email,
+      "phone": this.state.phone,
+      "date": this.state.date,
+      "chosenSeating": this.state.chooseSeating
+    }
+    )
+
+    fetch(
+      "http://localhost/restaurant/src/components/php/mail.php?mailData=" +
+      mailValues,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "text/plain"
+        }
+      }
+    )
+      .then(response => response.text())
+      .then(response => {
+        console.log(response);
+      })
+  }
 
   searchForVacantSeatings = () => {
     this.fetchGetRequest("search", this.state.date, this.setSeating);
   };
 
   setSeating = response => {
+    console.log(response);
     this.setState({
       seatingTimes: {
         seatingOne: response.seatingOne,
@@ -150,13 +180,17 @@ class Book extends Component {
     });
   };
 
+  componentDidMount = () => {
+    this.searchForVacantSeatings();
+  }
+
   render() {
 
     return (
       <div>
         <React.Fragment>
           {this.state.bookingComplete && (
-            <SuccessMessage date={this.state.date} seating={this.state.seating} />
+            <SuccessMessage date={this.state.date} seating={this.state.chosenSeating} />
           )}
           {!this.state.changeDate &&
             !this.state.bookingComplete && (
@@ -173,17 +207,21 @@ class Book extends Component {
           )}
 
           <div className="form-container">
-            {this.state.chooseSeating && (
-              <SeatingForm
-                seatingTimes={this.state.seatingTimes}
-                chosenSeating={this.state.chosenSeating}
-                handleChange={this.handleChange}
-                handleClick={this.proceedBooking}
-              />
-            )}
+            <form>
+              {this.state.chooseSeating && (
+                <SeatingForm
+                  seatingTimes={this.state.seatingTimes}
+                  handleChange={this.handleChange}
+                  handleClick={this.proceedBooking}
+                  firstSeatingDefault={null}
+                  secondSeatingDefault={null}
+                  admin={false}
+                />
+              )}
+            </form>
 
             {this.state.error !== "" &&
-            <ErrorMessage>{this.state.error}</ErrorMessage>
+              <ErrorMessage>{this.state.error}</ErrorMessage>
             }
 
             {this.state.gdpr && (

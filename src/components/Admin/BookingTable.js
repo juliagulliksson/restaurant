@@ -11,24 +11,27 @@ class BookingTable extends React.Component {
       .filter(booking => {
         return (
           booking.name.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-          -1 ||
+            -1 ||
           booking.phone.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-          -1 ||
+            -1 ||
           booking.email.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-          -1 ||
+            -1 ||
           booking.bookingId.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-          -1
+            -1
         );
       })
       .map(booking => (
-         <BookingRow
-            key={booking.bookingId}
-            booking={booking}
-            deleteBooking={this.props.deleteBooking}
-       />
+        <BookingRow
+          key={booking.bookingId}
+          booking={booking}
+          deleteBooking={this.props.deleteBooking}
+          handleChange={this.props.handleChange}
+        />
       ));
-    return (
-      <div>
+    console.log(rows.length);
+    if (rows.length > 0) {
+      return (
+        <div>
           <div className="table-header-desktop">
             <ul>
               <li>ID</li>
@@ -39,12 +42,14 @@ class BookingTable extends React.Component {
               <li>Email</li>
             </ul>
           </div>
-          
-          <div className="table-content-wrapp">{rows}</div> 
-        
-    </div>
-   
-    );
+
+          <div className="table-content-wrapp">{rows}</div>
+        </div>
+      );
+    } else {
+      //error message
+      return <div>No bookings found </div>;
+    }
   }
 }
 export default BookingTable;

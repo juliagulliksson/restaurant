@@ -1,17 +1,20 @@
 import React from "react";
 import Button from "./Button";
+import ErrorMessage from './../uiElements/ErrorMessage';
 
 export default function SeatingForm(props) {
+  console.log(props.seatingTimes);
   return (
     <React.Fragment>
-      {props.seatingTimes.seatingTwo > 14 &&
-      props.seatingTimes.seatingOne > 14 ? (
-        <p>Sorry! No seating times available at this date</p>
+      {props.seatingTimes.seatingTwo >= 15 &&
+      props.seatingTimes.seatingOne >= 15 ? (
+        <ErrorMessage>Sorry! No seating times available at this date</ErrorMessage>
       ) : (
-        <form>
+
           <div className="form-group">
-            <h2>Available seating times:</h2>
-            {props.seatingTimes.seatingOne < 14 && (
+          {!props.admin &&   <h2>Available seating times:</h2>}
+          
+            {props.seatingTimes.seatingOne < 15 && (
               <div className="form-check form-check-inline">
                 <label className="form-check-label">
                   <input
@@ -26,7 +29,7 @@ export default function SeatingForm(props) {
               </div>
             )}
 
-            {props.seatingTimes.seatingTwo < 14 && (
+            {props.seatingTimes.seatingTwo < 15 && (
               <div className="form-check form-check-inline">
                 <label className="form-check-label">
                   <input
@@ -40,12 +43,12 @@ export default function SeatingForm(props) {
                 </label>
               </div>
             )}
-
             <br />
-
+            {!props.admin &&
             <Button handleClick={props.handleClick}>Proceed booking</Button>
+            }
+            
           </div>
-        </form>
       )}
     </React.Fragment>
   );
