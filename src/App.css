@@ -260,9 +260,9 @@ select.form-control:not([size]):not([multiple]) {
 .required {
   color: rgb(163, 6, 6);
 }
-/* .btn{
+ .btn{
   margin-bottom:10px;
-} */
+} 
 /* Footer */
 
 footer ul {
@@ -278,6 +278,15 @@ footer ul li {
 }
 
 /* Modal */
+
+.editField{
+  display: inline-block;
+  margin: 10px;
+}
+
+.modal-body .form-group{
+  margin: 0;
+}
 
 .display-block {
   display: block;

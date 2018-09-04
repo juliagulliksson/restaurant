@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function EditBookingForm(props){
   return(
-    <React.Fragment>
+      <div className="form-group">
       <label className="editField" htmlFor="name">
       Name
       </label>
       <input
-        className="editField"
+        className="editField form-control"
         type="text"
         name="name"
         defaultValue={props.defaultName}
@@ -18,7 +18,7 @@ export default function EditBookingForm(props){
         Phone
       </label>
       <input
-        className="editField"
+        className="editField form-control"
         type="text"
         name="phone"
         defaultValue={props.defaultPhone}
@@ -29,12 +29,12 @@ export default function EditBookingForm(props){
         Email
       </label>
       <input
-        className="editField"
+        className="editField form-control"
         type="text"
         name="email"
         defaultValue={props.defaultEmail}
         onChange={props.handleChange}
       />
-  </React.Fragment>
+      </div>
   )
 }
