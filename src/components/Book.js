@@ -64,7 +64,6 @@ class Book extends Component {
       .then(response => {
         thenFunction(response);
       });
-    this.mail();
   };
 
   mail = () => {
@@ -74,12 +73,12 @@ class Book extends Component {
       "email": this.state.email,
       "phone": this.state.phone,
       "date": this.state.date,
-      "chosenSeating": this.state.chooseSeating
+      "chosenSeating": this.state.chosenSeating
     }
     )
 
     fetch(
-      "http://localhost/restaurant/src/components/php/mail.php?mailData=" +
+      "http://localhost/restaurant/src/components/php/confirmBookingEmail.php?mailData=" +
       mailValues,
       {
         method: "GET",
@@ -89,7 +88,6 @@ class Book extends Component {
         }
       }
     )
-      .then(response => response.text())
   }
 
   searchForVacantSeatings = () => {
@@ -164,6 +162,7 @@ class Book extends Component {
 
   book = () => {
     this.fetchGetRequest("post", this.state, this.setBookingCompleteStates);
+    this.mail();
   };
 
   setBookingCompleteStates = () => {

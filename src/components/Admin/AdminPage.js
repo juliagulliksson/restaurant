@@ -68,7 +68,7 @@ class AdminPage extends React.Component {
     bookingInfo = JSON.stringify(bookingInfo);
 
     fetch(
-      "http://localhost/restaurant/src/components/php/sendConfirmationEmail.php?data=" +
+      "http://localhost/restaurant/src/components/php/confirmCancellationEmail.php?data=" +
       bookingInfo,
       {
         method: "GET",
@@ -78,7 +78,6 @@ class AdminPage extends React.Component {
         }
       }
     )
-      .then(response => response.json())
   };
 
   getBookingsFromApi = () => {
@@ -87,8 +86,6 @@ class AdminPage extends React.Component {
       .then(bookings => {
         this.setState({ bookings });
       })
-      .catch(error => {
-      });
   };
 
   deleteBooking = bookingInfo => {

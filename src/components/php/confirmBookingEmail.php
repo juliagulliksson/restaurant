@@ -10,12 +10,18 @@ $mailData = json_decode($_GET["mailData"], false);
 $to = $mailData->email; 
 //Subject of the email.
 $subject = 'Booking confirmation';
-//Message to be sent to confirm the booking with the customer.
-$message = "Dear " . $mailData->name . ", you have a reservation for " . $mailData->date;
+
+if($mailData->chosenSeating == "firstSeating"){
+  $seatingTime = "18:00";
+} else {
+  $seatingTime = "21:00";
+}
+
+$message = "Dear " . $mailData->name . ", you have a reservation for " . $mailData->date . " at " . $seatingTime;
 //Headers
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers = 'From: axel.ferb@gmail.com' . "\r\n";
+$headers = 'From: admin@finedinne.com' . "\r\n";
 //What to sent to who.
 echo json_encode($message);
 mail($to, $subject, $message, $headers);
