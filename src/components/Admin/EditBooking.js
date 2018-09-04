@@ -26,7 +26,6 @@ export default class EditBooking extends Component {
   };
 
   handleChange = event => {
-    console.log(event);
     //Update all input field states based on their HTML names
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -47,13 +46,13 @@ export default class EditBooking extends Component {
 
   handleSave = (event) => {
     let formValues = JSON.stringify({
-      "phone" : this.state.phone,
-      "date" : this.state.date,
-      "email" : this.state.email,
-      "name" : this.state.name,
+      "phone": this.state.phone,
+      "date": this.state.date,
+      "email": this.state.email,
+      "name": this.state.name,
       "bookingId": this.state.bookingId,
-      "chosenSeating" : this.state.chosenSeating,
-      "originalPhoneNumber" : this.props.booking.phone
+      "chosenSeating": this.state.chosenSeating,
+      "originalPhoneNumber": this.props.booking.phone
     });
     fetch(
       `http://localhost/restaurant/src/components/php/edit.php?formData=
@@ -68,7 +67,6 @@ export default class EditBooking extends Component {
     )
       .then(() => {
         //Close the edit popup
-        console.log(this.props);
         this.props.handleClose();
         //Get the edited bookings in AdminPage.js
         this.props.handleChange();
@@ -90,19 +88,19 @@ export default class EditBooking extends Component {
           <br />
 
           <SeatingForm
-                firstSeatingDefault={this.props.booking.seatingOne === "1" ? true : false}
-                secondSeatingDefault={this.props.booking.seatingTwo === "1" ? true : false}
-                seatingTimes={this.state.seatingTimes}
-                handleChange={this.handleChange}
-                admin={true}
-          /> 
+            firstSeatingDefault={this.props.booking.seatingOne === "1" ? true : false}
+            secondSeatingDefault={this.props.booking.seatingTwo === "1" ? true : false}
+            seatingTimes={this.state.seatingTimes}
+            handleChange={this.handleChange}
+            admin={true}
+          />
           <br />
 
-          <EditBookingForm  
-                defaultName={this.state.name}
-                defaultPhone={this.state.phone}
-                defaultEmail={this.state.email}
-                handleChange={this.handleChange} />
+          <EditBookingForm
+            defaultName={this.state.name}
+            defaultPhone={this.state.phone}
+            defaultEmail={this.state.email}
+            handleChange={this.handleChange} />
 
 
         </form>
