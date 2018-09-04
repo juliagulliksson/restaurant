@@ -16,7 +16,11 @@ body {
 .button-header{
   display: block;
   padding: 10px;
-  margin: 5px;
+  margin: 10px;
+}
+
+.table-header{
+  font-weight: 700;
 }
 
 .book h1{
@@ -279,9 +283,14 @@ footer ul li {
 
 /* Modal */
 
+hr{
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
 .editField{
-  display: inline-block;
-  margin: 10px;
+  width: 60%;
+  margin: 0px auto;
 }
 
 .modal-body .form-group{

@@ -13,7 +13,6 @@ export default function EditBookingForm(props){
           defaultValue={props.defaultName}
           onChange={props.handleChange}
         />
-        <br />
         <label className="editField" htmlFor="phone">
           Phone
         </label>
@@ -24,7 +23,6 @@ export default function EditBookingForm(props){
           defaultValue={props.defaultPhone}
           onChange={props.handleChange}
         />
-        <br />
         <label className="editField" htmlFor="email">
           Email
         </label>

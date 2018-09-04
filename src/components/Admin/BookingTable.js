@@ -51,27 +51,33 @@ class BookingTable extends React.Component {
           <div className="container-fluid">
             <div className="row">
             <div className="col-1">
-              <p>ID</p>
+              <p className="table-header">ID</p>
+              <hr/>
               {rows.map(booking => (<p key={booking.bookingId}>{booking.bookingId}</p>))}
             </div>
             <div className="col-2">
-              <p>Date</p>
+              <p className="table-header">Date</p>
+              <hr/>
               {rows.map(booking => (<p key={booking.bookingId}>{booking.date}</p>))}
             </div>
             <div className="col-1">
-              <p>Time</p>
+              <p className="table-header">Time</p>
+              <hr/>
               {rows.map(booking => (<p key={booking.bookingId}>{booking.seatingOne === "1" ? "18:00" : "21:00"}</p>))}
             </div> 
             <div className="col-2">
-              <p>Name</p>
+              <p className="table-header">Name</p>
+              <hr/>
               {rows.map(booking => (<p key={booking.bookingId}>{booking.name}</p>))}
             </div>
             <div className="col-1">
-              <p>Phone</p>
+              <p className="table-header">Phone</p>
+              <hr/>
               {rows.map(booking => (<p key={booking.bookingId}>{booking.phone}</p>))}
             </div>
             <div className="col-3">
-              <p>Email</p>
+              <p className="table-header">Email</p>
+              <hr/>
               {rows.map(booking => (<p key={booking.bookingId}>{booking.email}</p>))}
             </div>
             <div className="col-1">
