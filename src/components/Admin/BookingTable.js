@@ -28,23 +28,21 @@ class BookingTable extends React.Component {
   render() {
     const searchInput = this.props.searchInput;
     let rows = [];
-    console.log(this.props.bookings);
 
     rows = this.props.bookings
       .filter(booking => {
         return (
           booking.name.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.phone.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.email.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.bookingId.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
+          -1 ||
           booking.date.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
         );
       })
-    console.log(rows.length);
     if (rows.length > 0) {
       return (
         <div className="admin-table">
@@ -87,27 +85,27 @@ class BookingTable extends React.Component {
                   Delete
                 </button>))}
 
-                {rows.map(booking => (    
-                <BookingRow 
-                        showEdit={this.state.showEdit}
-                        showDelete={this.state.showDelete}
-                        hideEdit={this.hideEditModal}
-                        hideDelete={this.hideDeleteModal}
-                        key={booking.bookingId}
-                        booking={booking}
-                        deleteBooking={this.props.deleteBooking}
-                        handleChange={this.props.handleChange}  />
-              ))}
-              
-            </div>
-            <div className="col-md-1 col-sm-12">
-              <span className="button-header">{" "}</span>
-              {rows.map(booking => ( <button onClick={this.showEditModal} 
-              key={booking.bookingId} className="btn btn-secondary">
+                {rows.map(booking => (
+                  <BookingRow
+                    showEdit={this.state.showEdit}
+                    showDelete={this.state.showDelete}
+                    hideEdit={this.hideEditModal}
+                    hideDelete={this.hideDeleteModal}
+                    key={booking.bookingId}
+                    booking={booking}
+                    deleteBooking={this.props.deleteBooking}
+                    handleChange={this.props.handleChange} />
+                ))}
+
+              </div>
+              <div className="col-md-1 col-sm-12">
+                <span className="button-header">{" "}</span>
+                {rows.map(booking => (<button onClick={this.showEditModal}
+                  key={booking.bookingId} className="btn btn-secondary">
                   Edit
                 </button>))}
-            </div>
-        
+              </div>
+
             </div>
           </div>
 

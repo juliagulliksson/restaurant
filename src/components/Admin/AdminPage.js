@@ -32,15 +32,15 @@ class AdminPage extends React.Component {
     let today = moment();
     let selecedDate = moment(date);
     if (selecedDate <= today) {
-        this.setState({
-            error: true
-        })
+      this.setState({
+        error: true
+      })
     } else {
-        date = date.format('YYYY-MM-DD');
-        localStorage.setItem('date', date);
-        this.setState({
-            error: false
-        })
+      date = date.format('YYYY-MM-DD');
+      localStorage.setItem('date', date);
+      this.setState({
+        error: false
+      })
     }
   };
 
@@ -69,7 +69,7 @@ class AdminPage extends React.Component {
 
     fetch(
       "http://localhost/restaurant/src/components/php/sendConfirmationEmail.php?data=" +
-        bookingInfo,
+      bookingInfo,
       {
         method: "GET",
         headers: {
@@ -79,9 +79,6 @@ class AdminPage extends React.Component {
       }
     )
       .then(response => response.json())
-      .then(response => {
-        console.log(response);
-      });
   };
 
   getBookingsFromApi = () => {
@@ -89,16 +86,13 @@ class AdminPage extends React.Component {
       .then(response => response.json())
       .then(bookings => {
         this.setState({ bookings });
-        console.log(bookings);
       })
       .catch(error => {
-        console.log(error);
       });
   };
 
   deleteBooking = bookingInfo => {
     let newBookings = "";
-    console.log(bookingInfo);
 
     let bookingData = JSON.stringify({
       phone: bookingInfo.phone,
@@ -107,7 +101,7 @@ class AdminPage extends React.Component {
 
     fetch(
       "http://localhost/restaurant/src/components/php/deletebooking.php?data=" +
-        bookingData,
+      bookingData,
       {
         method: "DELETE",
         headers: {
@@ -135,15 +129,15 @@ class AdminPage extends React.Component {
     return (
       <div>
 
-      <div className="admin-booking">       
-        {this.state.error &&
-          <Error>This date is in the past, try again!</Error>
-        }
-        <SearchForm handleChange={this.handleDateChange}
+        <div className="admin-booking">
+          {this.state.error &&
+            <Error>This date is in the past, try again!</Error>
+          }
+          <SearchForm handleChange={this.handleDateChange}
             handleClick={this.navigate}
             dateValue={moment()}
             className={"search-container"} />
-      </div> 
+        </div>
 
         <BookingSearchBox
           searchInput={this.state.searchInput}
