@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import ErrorMessage from './../uiElements/ErrorMessage';
+import InputField from './InputField';
 
 export default function SeatingForm(props) {
   return (
@@ -11,17 +12,15 @@ export default function SeatingForm(props) {
         ) : (
 
           <div className="form-group">
-            {!props.admin && <h2>Available seating times:</h2>}
+            {props.firstSeatingDefault === null && <h2>Available seating times:</h2>}
 
             {props.seatingTimes.seatingOne < 15 && (
               <div className="form-check form-check-inline">
                 <label className="form-check-label">
-                  <input
-                    className="form-check-input"
-                    type="radio"
+                  <InputField
+                    defaultChecked={props.firstSeatingDefault}
+                    handleChange={props.handleChange}
                     value="firstSeating"
-                    name="chosenSeating"
-                    onChange={props.handleChange}
                   />
                   18:00
                 </label>
@@ -31,19 +30,17 @@ export default function SeatingForm(props) {
             {props.seatingTimes.seatingTwo < 15 && (
               <div className="form-check form-check-inline">
                 <label className="form-check-label">
-                  <input
-                    className="form-check-input"
-                    type="radio"
+                  <InputField
+                    defaultChecked={props.secondSeatingDefault}
+                    handleChange={props.handleChange}
                     value="secondSeating"
-                    name="chosenSeating"
-                    onChange={props.handleChange}
                   />
                   21:00
                 </label>
               </div>
             )}
             <br />
-            {!props.admin &&
+            {props.firstSeatingDefault === null &&
               <Button handleClick={props.handleClick}>Proceed booking</Button>
             }
 

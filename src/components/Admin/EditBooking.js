@@ -13,11 +13,7 @@ export default class EditBooking extends Component {
     seatingOne: this.props.booking.seatingOne,
     seatingTwo: this.props.booking.seatingTwo,
     chosenSeating: "",
-    bookingId: this.props.booking.bookingId,
-    seatingTimes: {
-      seatingOne: "",
-      seatingTwo: ""
-    }
+    bookingId: this.props.booking.bookingId
   };
 
   handleDateChange = date => {
@@ -90,9 +86,8 @@ export default class EditBooking extends Component {
           <SeatingForm
             firstSeatingDefault={this.props.booking.seatingOne === "1" ? true : false}
             secondSeatingDefault={this.props.booking.seatingTwo === "1" ? true : false}
-            seatingTimes={this.state.seatingTimes}
+            seatingTimes={this.props.seatingTimes}
             handleChange={this.handleChange}
-            admin={true}
           />
           <br />
 
