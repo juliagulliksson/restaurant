@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, accept");
 //Receive the GET-parameters from Book.js
 $formData = json_decode($_GET["formData"], false);
 
-if(!checkIfUserExists($formData->email)){
+if(!checkIfUserExists($formData->phone)){
   //User doesn't exist, insert user into database
   $statement = $pdo->prepare(
     "INSERT INTO users (name, email, phone) 

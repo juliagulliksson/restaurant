@@ -2,8 +2,8 @@
 
 function checkIfUserExists($value){
   require 'database.php';
-  $statement = $pdo->prepare("SELECT COUNT(email) FROM users
-  WHERE email = '$value'"); 
+  $statement = $pdo->prepare("SELECT COUNT(phone) FROM users
+  WHERE phone = '$value'"); 
   $statement->execute();
   $existing = $statement->fetch(PDO::FETCH_NUM);
   
@@ -13,5 +13,4 @@ function checkIfUserExists($value){
       $user_exists = false;
   } 
   return $user_exists;
-  
 }

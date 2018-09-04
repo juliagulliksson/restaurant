@@ -23,23 +23,24 @@ class BookingTable extends React.Component {
           key={booking.bookingId}
           booking={booking}
           deleteBooking={this.props.deleteBooking}
+          handleChange={this.props.handleChange}
         />
       ));
       return (
       <div>
-      <table>
-      <tbody>
-      <tr>
-      <th>Booking ID</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      </tr>
-      </tbody>
-      <tbody>{rows}</tbody>
-      </table>
+        <table>
+        <tbody>
+          <tr>
+          <th>Booking ID</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          </tr>
+        </tbody>
+        <tbody>{rows}</tbody>
+        </table>
       </div>
     );
   }
