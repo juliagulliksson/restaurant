@@ -129,9 +129,6 @@ class AdminPage extends React.Component {
         );
         this.sendConfirmationEmail(bookingInfo);
       })
-      .catch(error => {
-        console.log(error);
-      });
   };
 
   render() {
