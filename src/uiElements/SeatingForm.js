@@ -10,7 +10,6 @@ export default function SeatingForm(props) {
       props.seatingTimes.seatingOne >= 15 ? (
         <ErrorMessage>Sorry! No seating times available at this date</ErrorMessage>
       ) : (
-          <form>
 
           <div className="form-group">
           {!props.admin &&   <h2>Available seating times:</h2>}
@@ -50,8 +49,6 @@ export default function SeatingForm(props) {
             }
             
           </div>
-      
-       </form>
       )}
     </React.Fragment>
   );

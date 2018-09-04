@@ -207,16 +207,18 @@ class Book extends Component {
           )}
 
           <div className="form-container">
-            {this.state.chooseSeating && (
-              <SeatingForm
-                seatingTimes={this.state.seatingTimes}
-                handleChange={this.handleChange}
-                handleClick={this.proceedBooking}
-                firstSeatingDefault={null}
-                secondSeatingDefault={null}
-                admin={false}
-              />
-            )}
+            <form>
+              {this.state.chooseSeating && (
+                <SeatingForm
+                  seatingTimes={this.state.seatingTimes}
+                  handleChange={this.handleChange}
+                  handleClick={this.proceedBooking}
+                  firstSeatingDefault={null}
+                  secondSeatingDefault={null}
+                  admin={false}
+                />
+              )}
+            </form>
 
             {this.state.error !== "" &&
               <ErrorMessage>{this.state.error}</ErrorMessage>
