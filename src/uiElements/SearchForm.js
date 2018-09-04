@@ -2,7 +2,7 @@ import React from "react";
 import Button from './Button';
 import Date from './DatePicker';
 
-export default function searchForm({ handleClick, dateValue, handleChange, className }) {
+export default function searchForm({ handleClick, dateValue, handleChange, className, buttonText }) {
   let numberOfPeople = [
     "1 person",
     "2 people",
@@ -26,7 +26,7 @@ export default function searchForm({ handleClick, dateValue, handleChange, class
           <label htmlFor="date" className="sr-only">Choose a date:</label>
 
           <Date handleChange={handleChange} value={dateValue} />
-          <Button handleClick={handleClick}> Search for vacant tables </Button>
+          <Button handleClick={handleClick}> {buttonText} </Button>
         </div>
       </form>
     </div>

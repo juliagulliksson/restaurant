@@ -133,7 +133,8 @@ class AdminPage extends React.Component {
           <SearchForm handleChange={this.handleDateChange}
             handleClick={this.navigate}
             dateValue={moment()}
-            className={"search-container"} />
+            className={"search-container"}
+            buttonText="Make a new booking" />
         </div>
 
         <BookingSearchBox
