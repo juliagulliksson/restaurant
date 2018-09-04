@@ -48,34 +48,40 @@ class BookingTable extends React.Component {
         <div className="admin-table">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-1">
-                <p>ID</p>
-                {rows.map(booking => (<p key={booking.bookingId}>{booking.bookingId}</p>))}
-              </div>
-              <div className="col-2">
-                <p>Date</p>
-                {rows.map(booking => (<p key={booking.bookingId}>{booking.date}</p>))}
-              </div>
-              <div className="col-1">
-                <p>Time</p>
-                {rows.map(booking => (<p key={booking.bookingId}>{booking.seatingOne === "1" ? "18:00" : "21:00"}</p>))}
-              </div>
-              <div className="col-2">
-                <p>Name</p>
-                {rows.map(booking => (<p key={booking.bookingId}>{booking.name}</p>))}
-              </div>
-              <div className="col-1">
-                <p>Phone</p>
-                {rows.map(booking => (<p key={booking.bookingId}>{booking.phone}</p>))}
-              </div>
-              <div className="col-3">
-                <p>Email</p>
-                {rows.map(booking => (<p key={booking.bookingId}>{booking.email}</p>))}
-              </div>
-              <div className="col-1">
-                <span className="button-header">{" "}</span>
-                {rows.map(booking => (<button onClick={this.showDeleteModal}
-                  key={booking.bookingId} className="btn btn-danger">
+            <div className="col-1">
+              <p className="table-header">ID</p>
+              <hr/>
+              {rows.map(booking => (<p key={booking.bookingId}>{booking.bookingId}</p>))}
+            </div>
+            <div className="col-2">
+              <p className="table-header">Date</p>
+              <hr/>
+              {rows.map(booking => (<p key={booking.bookingId}>{booking.date}</p>))}
+            </div>
+            <div className="col-1">
+              <p className="table-header">Time</p>
+              <hr/>
+              {rows.map(booking => (<p key={booking.bookingId}>{booking.seatingOne === "1" ? "18:00" : "21:00"}</p>))}
+            </div> 
+            <div className="col-2">
+              <p className="table-header">Name</p>
+              <hr/>
+              {rows.map(booking => (<p key={booking.bookingId}>{booking.name}</p>))}
+            </div>
+            <div className="col-1">
+              <p className="table-header">Phone</p>
+              <hr/>
+              {rows.map(booking => (<p key={booking.bookingId}>{booking.phone}</p>))}
+            </div>
+            <div className="col-3">
+              <p className="table-header">Email</p>
+              <hr/>
+              {rows.map(booking => (<p key={booking.bookingId}>{booking.email}</p>))}
+            </div>
+            <div className="col-1">
+              <span className="button-header">{" "}</span>
+              {rows.map(booking => ( <button onClick={this.showDeleteModal} 
+                key={booking.bookingId} className="btn btn-danger">
                   Delete
                 </button>))}
 
