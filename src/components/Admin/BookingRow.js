@@ -63,7 +63,7 @@ class BookingRow extends React.Component {
 
   render() {
     const booking = this.props.booking;
-    console.log(booking.seatingOne);
+
     return (
       <tr>
         <td>{booking.bookingId}</td>
