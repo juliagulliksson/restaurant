@@ -12,9 +12,15 @@ $data = json_decode($_GET["data"], false);
 // Query returns bookings for current date and future dates.
 // No past dates will be returned. Do we want to look at old bookings?
 
+if($data->seatingOne == 1){
+  $seatingTime = "18:00";
+}else{
+  $seatingTime = "21:00";
+}
+
 $subject = "Reservation for ". $data->date ." has been cancelled";
 $message = "Dear " . $data->name . ", Your reservation for " . $data->date . 
-" at " . $data->seatingTime . " has been cancelled. Visit www.finnedinne.com to book again.";
+" at " . $seatingTime . " has been cancelled. Visit www.finnedinne.com to book again.";
 
 mail($data->email, $subject, $message);
 
