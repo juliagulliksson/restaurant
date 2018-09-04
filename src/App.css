@@ -256,10 +256,6 @@ select.form-control:not([size]):not([multiple]) {
   color: rgb(163, 6, 6);
 }
 
- .btn{
-  margin-bottom:10px;
-} 
-
 /* Footer */
 
 footer ul {
