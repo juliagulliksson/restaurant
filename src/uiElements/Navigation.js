@@ -5,7 +5,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <div className="title">
-        <h1>FINE DINNE</h1>
+        <h1>FINNE DINNE</h1>
         <ul className="navbar container">
           <li className="col-lg-4  col-md-12">
             <Link to="/">Home</Link>
