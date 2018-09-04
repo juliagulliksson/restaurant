@@ -275,13 +275,29 @@ footer ul li {
   border-bottom: 1px solid black;
 }
 /* Mobile styling */
-
+.admin h1{
+  padding:20px;
+}
+form .admin-search{
+  width:60%;
+}
 .table-header-desktop{
   display:none;
 }
-.table-content-wrapp ul{
+.booking-content ul{
   list-style:none;
+  margin:30px;
+  padding:0px;
 }
+.booking-content ul li{
+  margin:0.8px;
+  font-weight:bold;
+  font-size:20px;
+}
+.btn-secondary{
+margin:20px;
+}
+
 
 /* Desktop styling for Admin */
 @media only screen and (min-width: 768px) {
@@ -293,14 +309,15 @@ footer ul li {
   }
 
   /* Table style admin */
+  form .admin-search{
+    width:30%;
+  }
   .table-header-desktop{
     display:block;
     margin:0px;
     margin-right:400px;
     margin-left:50px;
     padding-right:20px;
-    
-   
   }
   .table-header-desktop ul{
     display:flex;
@@ -322,6 +339,8 @@ footer ul li {
     border-bottom: 2px solid;
     padding-left:0px;
   }
-
+  .btn-secondary{
+    margin:0px;
+    }
   
 }
