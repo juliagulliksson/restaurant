@@ -26,6 +26,7 @@ export default class EditBooking extends Component {
   };
 
   handleChange = event => {
+    console.log(event);
     //Update all input field states based on their HTML names
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -44,7 +45,7 @@ export default class EditBooking extends Component {
     this.props.handleClose();
   };
 
-  handleSave = () => {
+  handleSave = (event) => {
     let formValues = JSON.stringify({
       "phone" : this.state.phone,
       "date" : this.state.date,
@@ -67,6 +68,7 @@ export default class EditBooking extends Component {
     )
       .then(() => {
         //Close the edit popup
+        console.log(this.props);
         this.props.handleClose();
         //Get the edited bookings in AdminPage.js
         this.props.handleChange();

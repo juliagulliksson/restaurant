@@ -34,7 +34,7 @@ class BookingTable extends React.Component {
         <div>
           <div className="table-header-desktop">
             <ul>
-              <li>Booking ID</li>
+              <li>ID</li>
               <li>Date</li>
               <li>Time</li>
               <li>Name</li>
