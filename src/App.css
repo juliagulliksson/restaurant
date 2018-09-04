@@ -61,10 +61,6 @@ select.form-control:not([size]):not([multiple]) {
   color: rgb(163, 6, 6);
 }
 
-.btn {
-  margin: 0.8em;
-}
-
 /* App */
 
 .App {
@@ -247,11 +243,9 @@ select.form-control:not([size]):not([multiple]) {
 .required {
   color: rgb(163, 6, 6);
 }
-
-.btn {
-  margin: 0.8em;
+.btn{
+  margin-bottom:10px;
 }
-
 /* Footer */
 
 footer ul {
@@ -285,14 +279,49 @@ footer ul li {
 .table-header-desktop{
   display:none;
 }
+.table-content-wrapp ul{
+  list-style:none;
+}
 
 /* Desktop styling for Admin */
 @media only screen and (min-width: 768px) {
+ 
+  /* Search form  admin */
+  .admin-search{
+    padding:20px;
+    margin-bottom:20px;
+  }
+
+  /* Table style admin */
   .table-header-desktop{
     display:block;
+    margin:0px;
+    margin-right:400px;
+    margin-left:50px;
+    padding-right:20px;
+    
    
   }
   .table-header-desktop ul{
+    display:flex;
+    align-content: flex-start;
+    justify-content: space-between;
     list-style: none;
+    padding:10px 0px;
+    
   }
+  .table-header-desktop ul li{
+    font-weight: bold;
+    font-size:20px;
+  }
+  .table-content-wrapp ul{
+    display:flex;
+    align-content: flex-start;
+    justify-content: space-around;
+    margin:30px;
+    border-bottom: 2px solid;
+    padding-left:0px;
+  }
+
+  
 }
