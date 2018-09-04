@@ -45,6 +45,7 @@ export default class Home extends Component {
             handleClick={this.navigate}
             dateValue={moment()}
             className={"home-search-container"}
+            buttonText="Search for vacant tables"
           />
         </div>
         <div className="home">
