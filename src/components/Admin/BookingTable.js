@@ -29,8 +29,6 @@ class BookingTable extends React.Component {
         />
       ));
 
-    console.log(rows.length);
-
     if (rows.length > 0) {
       return (
         <div>
