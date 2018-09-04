@@ -16,7 +16,8 @@ class BookingTable extends React.Component {
           booking.email.toLowerCase().indexOf(searchInput.toLowerCase()) !==
             -1 ||
           booking.bookingId.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1
+            -1 ||
+          booking.date.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
         );
       })
       .map(booking => (
