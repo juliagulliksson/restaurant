@@ -21,7 +21,7 @@ $message = "Dear " . $mailData->name . ", you have a reservation for " . $mailDa
 //Headers
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers = 'From: admin@finedinne.com' . "\r\n";
+$headers = 'From: admin@finnedinne.com' . "\r\n";
 //What to sent to who.
 echo json_encode($message);
 mail($to, $subject, $message, $headers);
