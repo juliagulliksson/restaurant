@@ -1,5 +1,6 @@
 import React from "react";
 import BookingRow from "./BookingRow";
+import ErrorMessage from "../../uiElements/ErrorMessage";
 
 class BookingTable extends React.Component {
   render() {
@@ -48,7 +49,7 @@ class BookingTable extends React.Component {
       );
     } else {
       //error message
-      return <div>No bookings found </div>;
+      return <ErrorMessage>{<div>No bookings found</div>}</ErrorMessage>;
     }
   }
 }
