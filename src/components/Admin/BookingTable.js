@@ -6,7 +6,7 @@ class BookingTable extends React.Component {
   render() {
     const searchInput = this.props.searchInput;
     let rows = [];
-    //console.log(this.props.bookings);
+    console.log(this.props.bookings);
 
     rows = this.props.bookings
       .filter(booking => {
@@ -18,7 +18,8 @@ class BookingTable extends React.Component {
           booking.email.toLowerCase().indexOf(searchInput.toLowerCase()) !==
             -1 ||
           booking.bookingId.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1
+            -1 ||
+          booking.date.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
         );
       })
       .map(booking => (
