@@ -112,7 +112,7 @@ class AdminPage extends React.Component {
     )
        .then(() => {
         newBookings = this.state.bookings.filter(
-          booking => booking.userPhone !== bookingInfo.phone
+          booking => booking.bookingId !== bookingInfo.bookingId
         );
       }) 
       .then(() => {
