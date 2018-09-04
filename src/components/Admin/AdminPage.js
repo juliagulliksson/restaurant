@@ -1,6 +1,9 @@
 import React from "react";
 import BookingTable from "./BookingTable";
 import BookingSearchBox from "./BookingSearchBox";
+import moment from 'moment';
+import SearchForm from '../../uiElements/SearchForm';
+import Error from '../../uiElements/ErrorMessage';
 
 /* ADMIN PAGE FILE STRUCTURE:
 **
@@ -21,11 +24,34 @@ class AdminPage extends React.Component {
     bookings: [],
     searchInput: "",
     bookingId: "",
-    phone: ""
+    phone: "",
+    error: false
   };
+
+  handleDateChange = (date) => {
+    let today = moment();
+    let selecedDate = moment(date);
+    if (selecedDate <= today) {
+        this.setState({
+            error: true
+        })
+    } else {
+        date = date.format('YYYY-MM-DD');
+        localStorage.setItem('date', date);
+        this.setState({
+            error: false
+        })
+    }
+  };
+
+  navigate = () => {
+    this.props.history.push('/bookatable');
+  }
 
   componentDidMount() {
     this.getBookingsFromApi();
+    let date = moment().format("YYYY-MM-DD");
+    localStorage.setItem('date', date);
   }
 
   handleChange = () => {
@@ -103,14 +129,22 @@ class AdminPage extends React.Component {
         );
         this.sendConfirmationEmail(bookingInfo);
       })
-      .catch(error => {
-        console.log(error);
-      });
   };
 
   render() {
     return (
       <div>
+
+      <div className="admin-booking">       
+        {this.state.error &&
+          <Error>This date is in the past, try again!</Error>
+        }
+        <SearchForm handleChange={this.handleDateChange}
+            handleClick={this.navigate}
+            dateValue={moment()}
+            className={"search-container"} />
+      </div> 
+
         <BookingSearchBox
           searchInput={this.state.searchInput}
           onSearchInputChange={this.handleSearchInputChange}

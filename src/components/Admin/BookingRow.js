@@ -3,30 +3,7 @@ import DeleteBookingModal from "./DeleteBookingModal";
 import EditBookingModal from "./EditBookingModal";
 
 class BookingRow extends React.Component {
-  state = {
-    showDelete: false,
-    showEdit: false
-  };
-
-  onDateChange = date => {
-    console.log(date);
-  };
-
-  showDeleteModal = () => {
-    this.setState({ showDelete: true });
-  };
-
-  hideDeleteModal = () => {
-    this.setState({ showDelete: false });
-  };
-
-  showEditModal = () => {
-    this.setState({ showEdit: true });
-  };
-
-  hideEditModal = () => {
-    this.setState({ showEdit: false });
-  };
+  
 
   handleDelete = () => {
     this.setState({ showDelete: false });
@@ -51,18 +28,10 @@ class BookingRow extends React.Component {
 
     return (
       <div className="booking-content">
-        <ul>
-          <li>{booking.bookingId}</li>
-          <li>{booking.date}</li>
-          <li>{booking.seatingOne === "1" ? "18:00" : "21:00"}</li>
-          <li>{booking.name}</li>
-          <li>{booking.userPhone}</li>
-          <li>{booking.email}</li>
-        </ul>
 
         <EditBookingModal
-          show={this.state.showEdit}
-          handleClose={this.hideEditModal}
+          show={this.props.showEdit}
+          handleClose={this.props.hideEdit}
           handleConfirm={this.handleEdit}
           booking={booking}
           handleChange={this.props.handleChange}
@@ -70,8 +39,8 @@ class BookingRow extends React.Component {
         />
 
         <DeleteBookingModal
-          show={this.state.showDelete}
-          handleClose={this.hideDeleteModal}
+          show={this.props.showDelete}
+          handleClose={this.props.hideDelete}
           handleConfirm={this.handleDelete}
         >
           <p>Booking ID: {booking.bookingId}</p>
@@ -82,17 +51,8 @@ class BookingRow extends React.Component {
           <p>Email: {booking.email}</p>
         </DeleteBookingModal>
 
-        <div className="button-container">
-          <button onClick={this.showDeleteModal} className="btn btn-danger">
-            Delete
-          </button>
+       
 
-          <button onClick={this.showEditModal} className="btn btn-secondary">
-            Edit
-          </button>
-        </div>
-
-        {/* end of button container*/}
       </div>
     );
   }
