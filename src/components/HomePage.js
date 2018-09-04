@@ -47,7 +47,8 @@ export default class Home extends Component {
                 <SearchForm handleChange={this.handleDateChange}
                     handleClick={this.navigate}
                     dateValue={moment()}
-                    className={"home-search-container"} />
+                    className={"home-search-container"}
+                    buttonText="Search for vacant tables" />
             </div>
             <div className="home">
                 <h1>Finne Dinner</h1>

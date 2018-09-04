@@ -64,12 +64,11 @@ class BookingRow extends React.Component {
 
   render() {
     const booking = this.props.booking;
-    console.log(booking.seatingOne)
     return (
     <tr>
       <td>{booking.bookingId}</td>
       <td>{booking.date}</td>
-       <td>{booking.seatingOne === 1 ? "18:00" : "21:00"}</td> 
+       <td>{booking.seatingOne === "1" ? "18:00" : "21:00"}</td> 
       <td>{booking.name}</td>
       <td>{booking.userPhone}</td>
       <td>{booking.email}</td>

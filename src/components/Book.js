@@ -198,6 +198,7 @@ class Book extends Component {
               dateValue={moment(this.state.date)}
               handleClick={this.searchForVacantSeatings}
               className="search-container"
+              buttonText="Search for vacant tables"
             />
           )}
 
