@@ -90,9 +90,6 @@ class Book extends Component {
       }
     )
       .then(response => response.text())
-      .then(response => {
-        console.log(response);
-      })
   }
 
   searchForVacantSeatings = () => {
@@ -100,7 +97,6 @@ class Book extends Component {
   };
 
   setSeating = response => {
-    console.log(response);
     this.setState({
       seatingTimes: {
         seatingOne: response.seatingOne,
