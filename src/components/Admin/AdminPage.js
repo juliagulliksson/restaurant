@@ -110,11 +110,11 @@ class AdminPage extends React.Component {
         }
       }
     )
-      .then(() => {
+       .then(() => {
         newBookings = this.state.bookings.filter(
           booking => booking.userPhone !== bookingInfo.phone
         );
-      })
+      }) 
       .then(() => {
         this.state.bookings.map(booking =>
           this.setState({
