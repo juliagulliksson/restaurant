@@ -210,7 +210,6 @@ class Book extends Component {
                   handleClick={this.proceedBooking}
                   firstSeatingDefault={null}
                   secondSeatingDefault={null}
-                  admin={false}
                 />
               )}
             </form>
